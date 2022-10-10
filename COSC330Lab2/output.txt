@@ -1,0 +1,45 @@
+Printing employeeArray[0]
+John Smith
+social security number: 123-12-1234
+job title: BigBoss
+base salary: 100000.00
+bonus pay: 5000.00
+stock option: 2500.00
+
+Printing employeeArray[1]
+Jim Bob
+social security number: 321-21-4321
+job title: Sr. Dev
+base salary: 75000.00
+profit share: 2500.00
+overtime pay: 5000.00
+
+Printing employeeArray[2]
+Spencer Lefever
+social security number: 999-99-9999
+job title: Test Engineer
+base salary: 65000.00
+profit share: 5000.00
+
+Printing executive
+John Smith
+social security number: 123-12-1234
+job title: BigBoss
+base salary: 100000.00
+bonus pay: 5000.00
+stock option: 2500.00
+
+Printing softwareEngineer
+Jim Bob
+social security number: 321-21-4321
+job title: Sr. Dev
+base salary: 75000.00
+profit share: 2500.00
+overtime pay: 5000.00
+
+Printing testEngineer
+Spencer Lefever
+social security number: 999-99-9999
+job title: Test Engineer
+base salary: 65000.00
+profit share: 5000.00

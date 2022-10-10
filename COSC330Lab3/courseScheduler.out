@@ -1,0 +1,10 @@
+slefever1@slefever1-Inspiron-7590-2n1:~/CompSci/COSC330/COSC330Lab3/courseScheduler$ java courseSchedulerTest QuickSort
+Printing sorted student list
+Stu0 Stu1 Stu2 Stu3 Stu4 Stu5 Stu6 Stu7 Stu8 Stu9 
+slefever1@slefever1-Inspiron-7590-2n1:~/CompSci/COSC330/COSC330Lab3/courseScheduler$ java courseSchedulerTest BubbleSort
+Printing sorted student list
+Stu0 Stu1 Stu2 Stu3 Stu4 Stu5 Stu6 Stu7 Stu8 Stu9 
+slefever1@slefever1-Inspiron-7590-2n1:~/CompSci/COSC330/COSC330Lab3/courseScheduler$ java courseSchedulerTest SelectionSort
+Printing sorted student list
+Stu0 Stu1 Stu2 Stu3 Stu4 Stu5 Stu6 Stu7 Stu8 Stu9 
+slefever1@slefever1-Inspiron-7590-2n1:~/CompSci/COSC330/COSC330Lab3/courseScheduler$ 
