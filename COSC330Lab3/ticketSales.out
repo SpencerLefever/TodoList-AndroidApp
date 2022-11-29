@@ -1,6 +1,0 @@
-slefever1@slefever1-Inspiron-7590-2n1:~/CompSci/COSC330/COSC330Lab3/ticketsSales$ java ticketSalesTest 
-        Adult   Child   Senior
-US      12.075  7.875   9.975
-Canada  12.305  8.025   10.165
-Germany 12.535  8.175   10.355
-slefever1@slefever1-Inspiron-7590-2n1:~/CompSci/COSC330/COSC330Lab3/ticketsSales$ 
