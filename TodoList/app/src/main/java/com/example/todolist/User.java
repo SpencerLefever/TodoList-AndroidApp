@@ -20,7 +20,7 @@ public class User {
         String description = "Basic task created as default task for user to see layout";
         String type = "Personal";
         String color = "null";
-        Task baseTask = new PersonalTask(title, description, type, color);
+        Task baseTask = new Task(title, description, type);
 
         //Add task to the list
         taskArray.add(baseTask);

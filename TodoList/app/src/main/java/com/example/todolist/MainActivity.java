@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -57,9 +58,30 @@ public class MainActivity extends AppCompatActivity {
 
     //Override onResume method to update task view
     @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
     protected void onResume() {
         super.onResume();
-        updateMultiTaskView();
+        Toast.makeText(this, "Main activity restarted", Toast.LENGTH_LONG).show();
+        if(true) {
+
+            Intent intent = getIntent();
+
+            //Get new task from the intent
+            Task newTask = intent.getParcelableExtra("NewTask");
+
+            if(newTask != null) {
+                Log.v("New Task Resume", "Main activity resumed");
+                Log.v("New Task Description", "Description " + newTask.getDescription());
+                Log.v("New Task Title", newTask.getTitle());
+                Log.v("New Task Type", newTask.getType());
+
+                addToView(newTask);
+            }
+            else {
+                Log.v("New Task Resume", "Main Activity Resumes could not find newTask");
+            }
+        }
     }
 
     //Go Add tasks activity when add button is clicked
@@ -117,18 +139,7 @@ public class MainActivity extends AppCompatActivity {
     //Method to check model task array to update if needed
     //This method call addToView() which calls setTaskLayoutListeners()
     public void updateMultiTaskView() {
-        //Only update if size of task array has changed
-        if(numTasks != user.taskArray.size()) {
-            numTasks = user.taskArray.size();
 
-            if(multiTaskLayout != null) {
-                multiTaskLayout.removeAllViews();
-
-                for (int i = 0; i < numTasks; i++) {
-                    addToView((Task) user.taskArray.get(i));
-                }
-            }
-        }
     }
 
     //Method to add a task object to the view
@@ -138,6 +149,9 @@ public class MainActivity extends AppCompatActivity {
 
         setTaskLayoutListeners(tl);
 
+        Toast.makeText(this, "Adding new task to view", Toast.LENGTH_LONG).show();
+
+        multiTaskLayout.setVisibility(View.VISIBLE);
         multiTaskLayout.addView(tl);
     }
 

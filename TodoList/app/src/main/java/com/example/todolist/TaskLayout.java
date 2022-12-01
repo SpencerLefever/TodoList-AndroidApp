@@ -12,8 +12,9 @@ public class TaskLayout extends LinearLayout {
 
     public TaskLayout(Context context, Task task) {
         super(context);
-        initTaskLayout(context);
         initTaskButton(task);
+
+        initTaskLayout(context);
     }
 
     private void initTaskButton(Task task) {
