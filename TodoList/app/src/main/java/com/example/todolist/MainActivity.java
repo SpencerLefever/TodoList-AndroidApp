@@ -1,18 +1,33 @@
 package com.example.todolist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Xml;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,71 +38,58 @@ public class MainActivity extends AppCompatActivity {
     //Variables for settings and add task buttons
     private Button settingsButton;
     private Button addTaskButton;
+    private LayoutInflater layoutInflater;
 
-    //Variables for task layout components
-    private LinearLayout multiTaskLayout;
-//    private TaskLayout taskLayout;
-//    private LinearLayout taskLayout;
-//    private CheckBox taskCheckBox;
-//    private Button taskButton;
-//    private Button deleteButton;
+    private CheckBox taskCheckBox;
+    private Button taskButton;
+    private Button deleteButton;
+    private RecyclerView multiTaskLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Call model constructor
-        user = new User();
-        updateMultiTaskView();
+        user = User.getInstance();
+
+        updateModel();
+
+        //Update view
+        TaskLayoutRecyclerViewAdapter adapter = new TaskLayoutRecyclerViewAdapter(this, user);
+        multiTaskLayout.setAdapter(adapter);
+        multiTaskLayout.setLayoutManager(new LinearLayoutManager(this));
+
+        multiTaskLayout = findViewById(R.id.MultiTaskLayout);
+
+        layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //Find settings and add buttons by id
         settingsButton = findViewById(R.id.SettingsButton);
         addTaskButton = findViewById(R.id.AddTaskButton);
 
-        //Find MultiTaskLayout by id
-        multiTaskLayout = findViewById(R.id.MultiTaskLayout);
-
-
         //Add onClickListeners to settings and add task buttons
         settingsButton.setOnClickListener(settingsOnClickListener);
         addTaskButton.setOnClickListener(addTaskOnClickListener);
-
-
     } //End of onCreate()
 
-    //Override onResume method to update task view
-    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "Main activity restarted", Toast.LENGTH_LONG).show();
-        if(true) {
+    public void updateModel() {
+        Intent intent = getIntent();
 
-            Intent intent = getIntent();
+        //Get new task from the intent
+        Task newTask = intent.getParcelableExtra("NewTask");
 
-            //Get new task from the intent
-            Task newTask = intent.getParcelableExtra("NewTask");
-
-            if(newTask != null) {
-                Log.v("New Task Resume", "Main activity resumed");
-                Log.v("New Task Description", "Description " + newTask.getDescription());
-                Log.v("New Task Title", newTask.getTitle());
-                Log.v("New Task Type", newTask.getType());
-
-                addToView(newTask);
-            }
-            else {
-                Log.v("New Task Resume", "Main Activity Resumes could not find newTask");
-            }
+        if(newTask == null) {
+            return;
         }
+        user.addTask(newTask);
     }
 
     //Go Add tasks activity when add button is clicked
     private final View.OnClickListener addTaskOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Log.v("Add Task", "Add task clicked");
             Intent i = new Intent(getApplicationContext(), AddTaskActivity.class);
             MainActivity.this.startActivity(i);
         }
@@ -97,8 +99,48 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener expandedTaskOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //Find which task was clicked based on title
+
+
             Intent i = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
             MainActivity.this.startActivity(i);
+        }
+    };
+
+    public void expandTask(View view){
+        Button selectedTaskBtn = (Button) view;
+        String taskTitle = (String) selectedTaskBtn.getText();
+
+        Task selectedTask = user.getTaskByTitle(taskTitle);
+
+        Intent intent = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
+
+        intent.putExtra("SelectedTask", selectedTask);
+
+        MainActivity.this.startActivity(intent);
+
+    }
+
+    //TODO Animate the taskLayout view to swipe either left or right based on deletion or completion
+
+    //Listener to delete a task from the list
+    private final View.OnClickListener deleteTaskOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            deleteTask(view);
+        }
+    };
+
+    public void deleteTask(View view) {
+
+        multiTaskLayout.removeView(view);
+    }
+
+    //Listener to complete a task from the list
+    private final View.OnClickListener completeTaskOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            deleteTask(view);
         }
     };
 
@@ -110,56 +152,4 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(i);
         }
     };
-
-    //TODO Animate the taskLayout view to swipe either left or right based on deletion or completion
-
-    //Listener to delete a task from the list
-    private final View.OnClickListener deleteTaskOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            multiTaskLayout.removeView((View) view.getParent());
-
-            //Remove the task from the model
-        }
-    };
-
-    //Listener to complete a task from the list
-    private final View.OnClickListener completeTaskOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            multiTaskLayout.removeView((View) view.getParent());
-
-            TaskLayout tl = (TaskLayout) view.getParent();
-            //Remove the task from the model
-            //user.taskArray.remove();
-        }
-    };
-
-
-    //Method to check model task array to update if needed
-    //This method call addToView() which calls setTaskLayoutListeners()
-    public void updateMultiTaskView() {
-
-    }
-
-    //Method to add a task object to the view
-    public void addToView(Task task) {
-        //Create task layout object to be populated and added to the view
-        TaskLayout tl = new TaskLayout(getApplicationContext(), task);
-
-        setTaskLayoutListeners(tl);
-
-        Toast.makeText(this, "Adding new task to view", Toast.LENGTH_LONG).show();
-
-        multiTaskLayout.setVisibility(View.VISIBLE);
-        multiTaskLayout.addView(tl);
-    }
-
-    //Method to set the onClick listeners for the different components of the task layout
-    public void setTaskLayoutListeners(TaskLayout tl) {
-        tl.taskCheckBox.setOnClickListener(completeTaskOnClickListener);
-        tl.taskButton.setOnClickListener(expandedTaskOnClickListener);
-        tl.deleteButton.setOnClickListener(deleteTaskOnClickListener);
-    }
-
 } //End of MainActivityClass

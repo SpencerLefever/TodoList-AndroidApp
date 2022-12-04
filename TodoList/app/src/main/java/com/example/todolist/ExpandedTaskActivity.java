@@ -18,6 +18,7 @@ public class ExpandedTaskActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_expanded_task);
+        Intent intent = getIntent();
 
         //Find components by id
         backButton = findViewById(R.id.BackButton);
@@ -25,9 +26,16 @@ public class ExpandedTaskActivity extends AppCompatActivity {
         taskDescription = findViewById(R.id.TaskDescription);
 
         //Set the TextViews based on what activity was clicked
+        Task expandedTask = intent.getParcelableExtra("ExpandedTask");
 
+        setTextViews(expandedTask);
         //Add onClickListener to back button
         backButton.setOnClickListener(backButtonOnClickListener);
+    }
+
+    public void setTextViews(Task expandedTask) {
+        taskName.setText(expandedTask.getTitle());
+        taskDescription.setText(expandedTask.getDescription());
     }
 
     //Go back to main page when back button is clicked

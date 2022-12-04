@@ -23,17 +23,6 @@
             android:textColor="#000000"
             android:textSize="54sp" />
 
-        <Button
-            android:id="@+id/SettingsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:gravity="right"
-            app:icon="@android:drawable/ic_dialog_info"
-            app:iconGravity="textTop"
-            app:iconTint="#000000"
-            tools:ignore="SpeakableTextPresentCheck" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -63,68 +52,23 @@
             android:textSize="40sp" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/TaskScrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MultiTaskLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTint="#000000"
-        android:paddingBottom="25px"
-        android:verticalScrollbarPosition="defaultPosition">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        android:layout_marginBottom="15px" />
 
-        <LinearLayout
-            android:id="@+id/MultiTaskLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="20px"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/TaskLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/task_border"
-                android:orientation="horizontal"
-                android:visibility="invisible">
-
-                <CheckBox
-                    android:id="@+id/TaskCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:buttonTint="#000000"
-                    android:minWidth="50dp"
-                    android:minHeight="50dp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-                <Button
-                    android:id="@+id/TaskButton"
-                    android:layout_width="276dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:text="Task"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:cornerRadius="3dip" />
-
-                <Button
-                    android:id="@+id/DeleteTaskButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#00FFFFFF"
-                    android:backgroundTint="#000000"
-                    android:gravity="center"
-                    android:text="X"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:rippleColor="#000000" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/SettingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:gravity="bottom|right"
+        app:icon="@android:drawable/ic_dialog_info"
+        app:iconGravity="textTop"
+        app:iconTint="#000000"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </LinearLayout>
