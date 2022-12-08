@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TodoList" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TodoList" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -13,4 +13,35 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Blue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/blue</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Red" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/red</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Green" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/green</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Yellow" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/yellow</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Magenta" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/magenta</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Black" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

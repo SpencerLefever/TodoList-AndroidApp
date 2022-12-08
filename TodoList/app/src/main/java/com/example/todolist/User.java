@@ -1,5 +1,8 @@
 package com.example.todolist;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -8,10 +11,13 @@ public class User {
 
     ArrayList taskArray;
     final int MAXTASKS = 20;
+    Typeface typeface;
+    Color backgroundColor;
 
     private User() {
 
         taskArray = new ArrayList<Task>();
+
 
         //Add default task to the list
         //addBaseTask();

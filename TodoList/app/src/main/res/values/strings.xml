@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">TodoList</string>
+    <string-array name="theme_array">
+        <item>Material-Light</item>
+        <item>Blue-Theme</item>
+        <item>Red-Theme</item>
+        <item>Yellow-Theme</item>
+        <item>Magenta-Theme</item>
+        <item>White-Theme</item>
+    </string-array>
+    <string-array name="font_array">
+        <item>Serif-Font</item>
+        <item>Monospace-Font</item>
+    </string-array>
 </resources>

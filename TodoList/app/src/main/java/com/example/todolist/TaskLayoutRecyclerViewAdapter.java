@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayoutRecyclerViewAdapter.MyViewHolder> {
     static Context context;
     static User user;
+    static int theme;
 
-    public TaskLayoutRecyclerViewAdapter(Context context, User user) {
+    public TaskLayoutRecyclerViewAdapter(Context context, User user, int theme) {
         this.context = context;
         this.user = user;
+        this.theme = theme;
     }
 
 
@@ -69,10 +71,10 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
                 Button selectedButton = (Button) view;
                 Task selectedTask = findTask((String) selectedButton.getText());
                 intent.putExtra("SelectedTask", selectedTask);
+                intent.putExtra("Theme", theme);
                 context.startActivity(intent);
             }
             else if(R.id.TaskCheckBox == view.getId() || R.id.DeleteTaskButton == view.getId()) {
-                Toast.makeText(context, taskButton.getText(), Toast.LENGTH_LONG).show();
                 Task selectedTask = findTask((String) taskButton.getText());
                 removeTask(selectedTask);
                 view.requestLayout();

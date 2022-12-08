@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsButton;
     private Button addTaskButton;
     private LayoutInflater layoutInflater;
+    private int currentTheme;
 
     private CheckBox taskCheckBox;
     private Button taskButton;
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        currentTheme = getIntent().getIntExtra("Theme", R.style.Theme_TodoList);
+        setTheme(currentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Update view
         multiTaskLayout = findViewById(R.id.MultiTaskLayout);
-        TaskLayoutRecyclerViewAdapter adapter = new TaskLayoutRecyclerViewAdapter(this, user);
+        TaskLayoutRecyclerViewAdapter adapter = new TaskLayoutRecyclerViewAdapter(this, user, currentTheme);
         multiTaskLayout.setAdapter(adapter);
         multiTaskLayout.setLayoutManager(new LinearLayoutManager(this));
 
@@ -89,66 +93,67 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener addTaskOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Log.v("Add Task", "Add task clicked");
             Intent i = new Intent(getApplicationContext(), AddTaskActivity.class);
+            i.putExtra("Theme", currentTheme);
             MainActivity.this.startActivity(i);
         }
     };
 
-    //Go to expanded task activity when an activity is clicked
-    private final View.OnClickListener expandedTaskOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //Find which task was clicked based on title
-
-
-            Intent i = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
-            MainActivity.this.startActivity(i);
-        }
-    };
-
-    public void expandTask(View view){
-        Button selectedTaskBtn = (Button) view;
-        String taskTitle = (String) selectedTaskBtn.getText();
-
-        Task selectedTask = user.getTaskByTitle(taskTitle);
-
-        Intent intent = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
-
-        intent.putExtra("SelectedTask", selectedTask);
-
-        MainActivity.this.startActivity(intent);
-
-    }
+//    //Go to expanded task activity when an activity is clicked
+//    private final View.OnClickListener expandedTaskOnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            //Find which task was clicked based on title
+//            Intent i = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
+//            i.putExtra("Theme", currentTheme);
+//            MainActivity.this.startActivity(i);
+//        }
+//    };
+//
+//    public void expandTask(View view){
+//        Button selectedTaskBtn = (Button) view;
+//        String taskTitle = (String) selectedTaskBtn.getText();
+//
+//        Task selectedTask = user.getTaskByTitle(taskTitle);
+//
+//        Intent intent = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
+//
+//        intent.putExtra("SelectedTask", selectedTask);
+//        intent.putExtra("Theme", currentTheme);
+//
+//        MainActivity.this.startActivity(intent);
+//
+//    }
 
     //TODO Animate the taskLayout view to swipe either left or right based on deletion or completion
 
-    //Listener to delete a task from the list
-    private final View.OnClickListener deleteTaskOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            deleteTask(view);
-        }
-    };
-
-    public void deleteTask(View view) {
-
-        multiTaskLayout.removeView(view);
-    }
-
-    //Listener to complete a task from the list
-    private final View.OnClickListener completeTaskOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            deleteTask(view);
-        }
-    };
+//    //Listener to delete a task from the list
+//    private final View.OnClickListener deleteTaskOnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            deleteTask(view);
+//        }
+//    };
+//
+//    public void deleteTask(View view) {
+//
+//        multiTaskLayout.removeView(view);
+//    }
+//
+//    //Listener to complete a task from the list
+//    private final View.OnClickListener completeTaskOnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            deleteTask(view);
+//        }
+//    };
 
     //Go to settings page when settings button is clicked
     private final View.OnClickListener settingsOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+            i.putExtra("Theme", currentTheme);
             MainActivity.this.startActivity(i);
         }
     };

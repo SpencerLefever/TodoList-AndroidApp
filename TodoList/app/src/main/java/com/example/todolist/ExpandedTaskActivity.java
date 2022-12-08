@@ -13,12 +13,14 @@ public class ExpandedTaskActivity extends AppCompatActivity {
     Button backButton;
     TextView taskName;
     TextView taskDescription;
+    int theme;
 
     @Override
     protected void onStart() {
+        theme = getIntent().getIntExtra("Theme", R.style.Theme_TodoList);
+        setTheme(theme);
         super.onStart();
         setContentView(R.layout.activity_expanded_task);
-        Intent intent = getIntent();
 
         //Find components by id
         backButton = findViewById(R.id.BackButton);
@@ -26,7 +28,7 @@ public class ExpandedTaskActivity extends AppCompatActivity {
         taskDescription = findViewById(R.id.TaskDescription);
 
         //Set the TextViews based on what activity was clicked
-        Task expandedTask = intent.getParcelableExtra("SelectedTask");
+        Task expandedTask = getIntent().getParcelableExtra("SelectedTask");
 
         setTextViews(expandedTask);
         //Add onClickListener to back button
@@ -43,6 +45,7 @@ public class ExpandedTaskActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("Theme", theme);
             ExpandedTaskActivity.this.startActivity(i);
         }
     };

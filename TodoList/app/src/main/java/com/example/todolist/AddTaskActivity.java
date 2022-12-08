@@ -25,10 +25,13 @@ public class AddTaskActivity extends AppCompatActivity {
     EditText titleTextBox;
     EditText descriptionTextBox;
     Task newTask;
+    int theme;
 
 
     @Override
     protected void onStart() {
+        theme = getIntent().getIntExtra("Theme", R.style.Theme_TodoList);
+        setTheme(theme);
         super.onStart();
         setContentView(R.layout.activity_add_task);
 
@@ -49,6 +52,7 @@ public class AddTaskActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("Theme", theme);
             AddTaskActivity.this.startActivity(i);
         }
     };
@@ -67,6 +71,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
             //Add bundle object to intent extras
             intent.putExtra("NewTask", newTask);
+            intent.putExtra("Theme", theme);
 
             //Go to main task
             AddTaskActivity.this.startActivity(intent);
