@@ -23,6 +23,17 @@
             android:textColor="#000000"
             android:textSize="54sp" />
 
+        <Button
+            android:id="@+id/SettingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:gravity="bottom|right"
+            app:icon="@android:drawable/ic_dialog_info"
+            app:iconGravity="textTop"
+            app:iconTint="#000000"
+            tools:ignore="SpeakableTextPresentCheck" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -59,16 +70,5 @@
         android:layout_marginLeft="15px"
         android:layout_marginRight="15px"
         android:layout_marginBottom="15px" />
-
-    <Button
-        android:id="@+id/SettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:gravity="bottom|right"
-        app:icon="@android:drawable/ic_dialog_info"
-        app:iconGravity="textTop"
-        app:iconTint="#000000"
-        tools:ignore="SpeakableTextPresentCheck" />
 
 </LinearLayout>

@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
         updateModel();
 
         //Update view
+        multiTaskLayout = findViewById(R.id.MultiTaskLayout);
         TaskLayoutRecyclerViewAdapter adapter = new TaskLayoutRecyclerViewAdapter(this, user);
         multiTaskLayout.setAdapter(adapter);
         multiTaskLayout.setLayoutManager(new LinearLayoutManager(this));
 
-        multiTaskLayout = findViewById(R.id.MultiTaskLayout);
 
         layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

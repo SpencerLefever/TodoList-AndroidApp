@@ -26,7 +26,7 @@ public class ExpandedTaskActivity extends AppCompatActivity {
         taskDescription = findViewById(R.id.TaskDescription);
 
         //Set the TextViews based on what activity was clicked
-        Task expandedTask = intent.getParcelableExtra("ExpandedTask");
+        Task expandedTask = intent.getParcelableExtra("SelectedTask");
 
         setTextViews(expandedTask);
         //Add onClickListener to back button
