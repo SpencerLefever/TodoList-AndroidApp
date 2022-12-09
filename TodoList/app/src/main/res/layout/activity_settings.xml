@@ -131,7 +131,7 @@
 
             android:onClick="white"
 
-            android:text="White" />
+            android:text="Default" />
 
         <RadioButton
 
