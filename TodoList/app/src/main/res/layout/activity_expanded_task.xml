@@ -22,8 +22,10 @@
         android:paddingLeft="10px"
         android:paddingRight="10px"
         android:text="Task Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#000000"
-        android:textSize="24sp" />
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TaskDescription"
@@ -32,6 +34,8 @@
         android:paddingLeft="10px"
         android:paddingRight="10px"
         android:text="Task Description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="italic" />
 </LinearLayout>

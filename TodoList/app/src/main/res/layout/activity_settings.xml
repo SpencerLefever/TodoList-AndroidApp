@@ -35,6 +35,8 @@
 
         android:backgroundTint="#00000000"
 
+        app:icon="@android:drawable/ic_menu_revert"
+
         android:text="Back"
         android:textColor="#000000"
         app:iconTint="#000000" />

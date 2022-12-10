@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
@@ -27,6 +28,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
     private Button deleteButton;
     private RecyclerView multiTaskLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         currentTheme = getIntent().getIntExtra("Theme", R.style.Theme_TodoList);
         setTheme(currentTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
