@@ -9,6 +9,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import org.xmlpull.v1.XmlPullParser;
+import android.media.MediaPlayer;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TaskLayout extends LinearLayout {
     CheckBox taskCheckBox;
@@ -17,7 +20,6 @@ public class TaskLayout extends LinearLayout {
 
     public TaskLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-
 
         TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.TaskLayout, defStyleAttr, defStyleRes);
 

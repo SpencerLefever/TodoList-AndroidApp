@@ -9,6 +9,7 @@ import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +50,9 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button taskButton, deleteButton;
         CheckBox taskCheckBox;
-
+        // MediaPlayers for deleting and completing tasks
+        MediaPlayer taskCompleted;
+        MediaPlayer removeTask;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +60,10 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
             taskButton = itemView.findViewById(R.id.TaskButton);
             deleteButton = itemView.findViewById(R.id.DeleteTaskButton);
             taskCheckBox = itemView.findViewById(R.id.TaskCheckBox);
+
+            // Sounds for deleting and completing tasks
+            taskCompleted = MediaPlayer.create(itemView.getContext(), R.raw.taskcompleted);
+            removeTask = MediaPlayer.create(itemView.getContext(), R.raw.removetask);
 
             taskButton.setOnClickListener(this);
             deleteButton.setOnClickListener(this);
@@ -78,6 +85,13 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
                 Task selectedTask = findTask((String) taskButton.getText());
                 removeTask(selectedTask);
                 view.requestLayout();
+            }
+
+            // Play sound on delete task or completed task
+            if(R.id.TaskCheckBox == view.getId()){
+                taskCompleted.start();
+            } else if(R.id.DeleteTaskButton == view.getId()){
+                removeTask.start();
             }
         }
 

@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import java.io.Serializable;
+import android.media.MediaPlayer;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -26,6 +27,9 @@ public class AddTaskActivity extends AppCompatActivity {
     EditText descriptionTextBox;
     Task newTask;
     int theme;
+    // Media player for add task sound
+    MediaPlayer taskAdded;
+
 
 
     @Override
@@ -45,6 +49,9 @@ public class AddTaskActivity extends AppCompatActivity {
         //Set listeners
         backButton.setOnClickListener(backButtonOnClickListener);
         confirmButton.setOnClickListener(confirmButtonOnClickListener);
+
+        //Media players for add task sound
+        taskAdded = MediaPlayer.create(this, R.raw.taskadded);
     }
 
     //Go back to main page when back button is clicked
@@ -72,6 +79,9 @@ public class AddTaskActivity extends AppCompatActivity {
             //Add bundle object to intent extras
             intent.putExtra("NewTask", newTask);
             intent.putExtra("Theme", theme);
+
+            //Play added task sound
+            taskAdded.start();
 
             //Go to main task
             AddTaskActivity.this.startActivity(intent);
