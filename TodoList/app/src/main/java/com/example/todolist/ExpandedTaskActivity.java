@@ -47,6 +47,7 @@ public class ExpandedTaskActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             i.putExtra("Theme", theme);
             ExpandedTaskActivity.this.startActivity(i);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
     };
 }

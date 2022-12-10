@@ -67,6 +67,7 @@
         android:id="@+id/MultiTaskLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutAnimation="@anim/layout_animation"
         android:layout_marginLeft="15px"
         android:layout_marginRight="15px"
         android:layout_marginBottom="15px" />

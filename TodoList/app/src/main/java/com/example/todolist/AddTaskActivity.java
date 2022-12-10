@@ -61,6 +61,7 @@ public class AddTaskActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             i.putExtra("Theme", theme);
             AddTaskActivity.this.startActivity(i);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
     };
 
@@ -85,6 +86,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
             //Go to main task
             AddTaskActivity.this.startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } //End of onClick
 
@@ -105,26 +107,8 @@ public class AddTaskActivity extends AppCompatActivity {
             taskType = (String) selectedButton.getText();
 
             newTask = new Task(title, description, taskType);
-//            //Check which button was pressed and create appropriate object
-//            if(selectedButtonId==R.id.EventTaskButton) {
-//                newTask = new EventTask(title, description, taskType, null);
-//            } else if(selectedButtonId==R.id.SchoolTaskButton) {
-//                newTask = new SchoolTask(title, description, taskType, null);
-//            } else if(selectedButtonId==R.id.PersonalTaskButton) {
-//                newTask = new PersonalTask(title, description, taskType, null);
-//            } else {
-//                newTask = null;
-//            }
             return newTask;
         }
-
-//        private TaskLayout createTaskLayout() {
-//            //TaskLayout and data members
-//            TaskLayout newTaskLayout = new TaskLayout(getApplicationContext(), newTask);
-//
-//            return newTaskLayout;
-//        }
-
     }; //End of confirmButtonListener
 
 

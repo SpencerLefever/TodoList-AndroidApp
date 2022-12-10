@@ -1,11 +1,16 @@
 package com.example.todolist;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -47,12 +52,12 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
         return user.getTaskArray().size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button taskButton, deleteButton;
         CheckBox taskCheckBox;
         // MediaPlayers for deleting and completing tasks
-        MediaPlayer taskCompleted;
-        MediaPlayer removeTask;
+        MediaPlayer taskCompletedAudio;
+        MediaPlayer removeTaskAudio;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,17 +67,23 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
             taskCheckBox = itemView.findViewById(R.id.TaskCheckBox);
 
             // Sounds for deleting and completing tasks
-            taskCompleted = MediaPlayer.create(itemView.getContext(), R.raw.taskcompleted);
-            removeTask = MediaPlayer.create(itemView.getContext(), R.raw.removetask);
+            taskCompletedAudio = MediaPlayer.create(itemView.getContext(), R.raw.taskcompleted);
+            removeTaskAudio = MediaPlayer.create(itemView.getContext(), R.raw.removetask);
 
             taskButton.setOnClickListener(this);
             deleteButton.setOnClickListener(this);
             taskCheckBox.setOnClickListener(this);
         }
 
+
         @Override
         public void onClick(View view) {
             Intent intent;
+            Animation completeAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_out_right);
+            completeAnimation.setDuration(500);
+            Animation deleteAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_out_left);
+            deleteAnimation.setDuration(500);
+            //Animation for going to expanded task
             if(R.id.TaskButton == view.getId()) {
                 intent = new Intent(context, ExpandedTaskActivity.class);
                 Button selectedButton = (Button) view;
@@ -80,19 +91,28 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
                 intent.putExtra("SelectedTask", selectedTask);
                 intent.putExtra("Theme", theme);
                 context.startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
             }
-            else if(R.id.TaskCheckBox == view.getId() || R.id.DeleteTaskButton == view.getId()) {
-                Task selectedTask = findTask((String) taskButton.getText());
-                removeTask(selectedTask);
-                view.requestLayout();
+            //Animation for complete task
+            else if(R.id.TaskCheckBox == view.getId()) {
+                view.startAnimation(completeAnimation);
+                removeAt(getAdapterPosition());
+                //view.requestLayout();
+                taskCompletedAudio.start();
             }
+            //Animation for deleted task
+            else if (R.id.DeleteTaskButton == view.getId()) {
+                view.startAnimation(deleteAnimation);
+                removeAt(getAdapterPosition());
+                //view.requestLayout();
+                removeTaskAudio.start();
+            }
+        }
 
-            // Play sound on delete task or completed task
-            if(R.id.TaskCheckBox == view.getId()){
-                taskCompleted.start();
-            } else if(R.id.DeleteTaskButton == view.getId()){
-                removeTask.start();
-            }
+        public void removeAt(int position) {
+            user.getTaskArray().remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, user.getTaskArray().size());
         }
 
         public Task findTask(String title) {

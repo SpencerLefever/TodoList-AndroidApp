@@ -34,46 +34,35 @@ public class SettingsActivity extends AppCompatActivity {
         fonts = (TextView) findViewById(R.id.textView2);
         themes = (TextView) findViewById(R.id.textView3);
         backButton = findViewById(R.id.Back);
-        Log.i("SettingsTask", "Oncreate invoked theme: " + theme);
 
         backButton.setOnClickListener(backButtonOnClickListener);
     }
 
     public void red(View view){
-//        RelativeLayout relativeLayout = findViewById(R.id.rl);
-//        relativeLayout.setBackgroundColor(Color.RED);
         theme=R.style.Theme_Red;
         getIntent().putExtra("Theme", theme);
         recreate();
     }
 
     public void blue(View view){
-//        RelativeLayout relativeLayout = findViewById(R.id.rl);
-//        relativeLayout.setBackgroundColor(Color.BLUE);
         theme=R.style.Theme_Blue;
         getIntent().putExtra("Theme", theme);
         recreate();
     }
 
     public void yellow(View view){
-//        RelativeLayout relativeLayout = findViewById(R.id.rl);
-//        relativeLayout.setBackgroundColor(Color.YELLOW);
         theme=R.style.Theme_Yellow;
         getIntent().putExtra("Theme", theme);
         recreate();
     }
 
     public void white(View view){
-//        RelativeLayout relativeLayout = findViewById(R.id.rl);
-//        relativeLayout.setBackgroundColor(Color.WHITE);
         theme=R.style.Theme_TodoList;
         getIntent().putExtra("Theme", theme);
         recreate();
     }
 
     public void magenta(View view){
-//        RelativeLayout relativeLayout = findViewById(R.id.rl);
-//        relativeLayout.setBackgroundColor(Color.MAGENTA);
         theme=R.style.Theme_Magenta;
         getIntent().putExtra("Theme", theme);
         recreate();
@@ -98,7 +87,9 @@ public class SettingsActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             i.putExtra("Theme", theme);
             SettingsActivity.this.startActivity(i);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
     };
+
 }
 

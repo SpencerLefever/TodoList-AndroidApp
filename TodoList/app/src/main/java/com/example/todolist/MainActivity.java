@@ -96,57 +96,11 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), AddTaskActivity.class);
             i.putExtra("Theme", currentTheme);
             MainActivity.this.startActivity(i);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     };
 
-//    //Go to expanded task activity when an activity is clicked
-//    private final View.OnClickListener expandedTaskOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            //Find which task was clicked based on title
-//            Intent i = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
-//            i.putExtra("Theme", currentTheme);
-//            MainActivity.this.startActivity(i);
-//        }
-//    };
-//
-//    public void expandTask(View view){
-//        Button selectedTaskBtn = (Button) view;
-//        String taskTitle = (String) selectedTaskBtn.getText();
-//
-//        Task selectedTask = user.getTaskByTitle(taskTitle);
-//
-//        Intent intent = new Intent(getApplicationContext(), ExpandedTaskActivity.class);
-//
-//        intent.putExtra("SelectedTask", selectedTask);
-//        intent.putExtra("Theme", currentTheme);
-//
-//        MainActivity.this.startActivity(intent);
-//
-//    }
-
     //TODO Animate the taskLayout view to swipe either left or right based on deletion or completion
-
-//    //Listener to delete a task from the list
-//    private final View.OnClickListener deleteTaskOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            deleteTask(view);
-//        }
-//    };
-//
-//    public void deleteTask(View view) {
-//
-//        multiTaskLayout.removeView(view);
-//    }
-//
-//    //Listener to complete a task from the list
-//    private final View.OnClickListener completeTaskOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            deleteTask(view);
-//        }
-//    };
 
     //Go to settings page when settings button is clicked
     private final View.OnClickListener settingsOnClickListener = new View.OnClickListener() {
@@ -155,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
             i.putExtra("Theme", currentTheme);
             MainActivity.this.startActivity(i);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     };
 } //End of MainActivityClass
