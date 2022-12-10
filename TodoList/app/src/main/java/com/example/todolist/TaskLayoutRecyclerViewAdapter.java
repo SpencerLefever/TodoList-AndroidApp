@@ -23,6 +23,9 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
     static Context context;
     static User user;
     static int theme;
+    float x1, x2;   //Holds swipe start and end position
+    static final int MIN_SWIPE = 250;
+
 
     public TaskLayoutRecyclerViewAdapter(Context context, User user, int theme) {
         this.context = context;
@@ -75,38 +78,56 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
             taskCheckBox.setOnClickListener(this);
         }
 
+        public void setTouchListeners() {
+            //Detect swipe for complete a task
+
+
+            //Detect Swipe for delete task
+        }
+
 
         @Override
         public void onClick(View view) {
-            Intent intent;
+
+            switch(view.getId()) {
+                case R.id.TaskButton:
+                    expandTask(view);
+                    break;
+                case R.id.TaskCheckBox:
+                    completeTask(view);
+                    break;
+                case R.id.DeleteTaskButton:
+                    deleteTask(view);
+                    break;
+            }
+        }
+
+        public void expandTask(View view) {
+            Intent intent = new Intent(context, ExpandedTaskActivity.class);
+            Button selectedButton = (Button) view;
+            Task selectedTask = findTask((String) selectedButton.getText());
+            intent.putExtra("SelectedTask", selectedTask);
+            intent.putExtra("Theme", theme);
+            context.startActivity(intent);
+            ((Activity) context).overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
+        }
+
+        public void completeTask(View view) {
             Animation completeAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_out_right);
             completeAnimation.setDuration(500);
+            view.startAnimation(completeAnimation);
+            removeAt(getAdapterPosition());
+            //view.requestLayout();
+            taskCompletedAudio.start();
+        }
+
+        public void deleteTask(View view) {
             Animation deleteAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_out_left);
             deleteAnimation.setDuration(500);
-            //Animation for going to expanded task
-            if(R.id.TaskButton == view.getId()) {
-                intent = new Intent(context, ExpandedTaskActivity.class);
-                Button selectedButton = (Button) view;
-                Task selectedTask = findTask((String) selectedButton.getText());
-                intent.putExtra("SelectedTask", selectedTask);
-                intent.putExtra("Theme", theme);
-                context.startActivity(intent);
-                ((Activity) context).overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
-            }
-            //Animation for complete task
-            else if(R.id.TaskCheckBox == view.getId()) {
-                view.startAnimation(completeAnimation);
-                removeAt(getAdapterPosition());
-                //view.requestLayout();
-                taskCompletedAudio.start();
-            }
-            //Animation for deleted task
-            else if (R.id.DeleteTaskButton == view.getId()) {
-                view.startAnimation(deleteAnimation);
-                removeAt(getAdapterPosition());
-                //view.requestLayout();
-                removeTaskAudio.start();
-            }
+            view.startAnimation(deleteAnimation);
+            removeAt(getAdapterPosition());
+            //view.requestLayout();
+            removeTaskAudio.start();
         }
 
         public void removeAt(int position) {
