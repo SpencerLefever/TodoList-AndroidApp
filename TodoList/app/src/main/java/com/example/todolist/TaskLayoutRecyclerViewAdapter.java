@@ -161,7 +161,6 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
             completeAnimation.setDuration(500);
             view.startAnimation(completeAnimation);
             removeAt(getAdapterPosition());
-            //view.requestLayout();
             taskCompletedAudio.start();
         }
 
@@ -170,7 +169,6 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
             deleteAnimation.setDuration(500);
             view.startAnimation(deleteAnimation);
             removeAt(getAdapterPosition());
-            //view.requestLayout();
             removeTaskAudio.start();
         }
 
@@ -182,9 +180,6 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
 
         public Task findTask(String title) {
             return user.getTaskByTitle(title);
-        }
-        public void removeTask(Task t) {
-            user.removeTask(t);
         }
     }
 

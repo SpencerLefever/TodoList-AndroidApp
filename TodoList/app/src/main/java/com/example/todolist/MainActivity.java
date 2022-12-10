@@ -3,40 +3,18 @@ package com.example.todolist;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //User model to hold task data
     User user;
-    int numTasks = 0;
 
     //Variables for settings and add task buttons
     private Button settingsButton;
@@ -44,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private LayoutInflater layoutInflater;
     private int currentTheme;
 
-    private CheckBox taskCheckBox;
-    private Button taskButton;
-    private Button deleteButton;
     private RecyclerView multiTaskLayout;
 
     @Override
