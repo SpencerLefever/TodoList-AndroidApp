@@ -1,11 +1,13 @@
 package com.example.todolist;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -24,7 +26,7 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
     static User user;
     static int theme;
     float x1, x2;   //Holds swipe start and end position
-    static final int MIN_SWIPE = 250;
+    static final int MIN_DISTANCE = 250;
 
 
     public TaskLayoutRecyclerViewAdapter(Context context, User user, int theme) {
@@ -73,18 +75,60 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
             taskCompletedAudio = MediaPlayer.create(itemView.getContext(), R.raw.taskcompleted);
             removeTaskAudio = MediaPlayer.create(itemView.getContext(), R.raw.removetask);
 
+            setClickListeners();
+            setTouchListeners();
+        }
+
+        public void setClickListeners() {
             taskButton.setOnClickListener(this);
             deleteButton.setOnClickListener(this);
             taskCheckBox.setOnClickListener(this);
         }
-
+        @SuppressLint("ClickableViewAccessibility")
         public void setTouchListeners() {
             //Detect swipe for complete a task
+            taskCheckBox.setOnTouchListener((view, motionEvent) -> {
+                switch(motionEvent.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = motionEvent.getX();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x2 = motionEvent.getX();
+                        float deltaX = x2 - x1;
+                        if (Math.abs(deltaX) > MIN_DISTANCE)
+                        {
+                            Toast.makeText(context, "Left->Right", Toast.LENGTH_SHORT).show ();
+                            completeTask(view);
+                            return true;
+                        }
+                    break;
+                }
+                return false;
+            });
 
+            //Detect swipe for delete task
+            deleteButton.setOnTouchListener((view, motionEvent) -> {
+                switch(motionEvent.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = motionEvent.getX();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x2 = motionEvent.getX();
+                        float deltaX = x2 - x1;
+                        if (Math.abs(deltaX) > MIN_DISTANCE)
+                        {
+                            Toast.makeText(context, "Right->Left", Toast.LENGTH_SHORT).show ();
+                            deleteTask(view);
+                            return true;
+                        }
+                        break;
+                }
+                return false;
+            });
 
-            //Detect Swipe for delete task
         }
-
 
         @Override
         public void onClick(View view) {
