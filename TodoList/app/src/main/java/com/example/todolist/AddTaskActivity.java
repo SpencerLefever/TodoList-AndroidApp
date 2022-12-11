@@ -2,22 +2,13 @@ package com.example.todolist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import java.io.Serializable;
 import android.media.MediaPlayer;
-import android.widget.Toast;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -26,7 +17,6 @@ public class AddTaskActivity extends AppCompatActivity {
     Button confirmButton;
     EditText titleTextBox;
     EditText descriptionTextBox;
-    Task newTask;
     int theme;
     // Media player for add task sound
     MediaPlayer taskAdded;
@@ -74,10 +64,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
             //Call create task method to populate newTask with necessary data
             newTask = createTask();
-
-            if (newTask == null) {
-
-            }
 
             //Go to main task
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

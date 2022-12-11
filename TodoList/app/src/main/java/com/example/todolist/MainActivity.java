@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
     //Variables for settings and add task buttons
     private Button settingsButton;
     private Button addTaskButton;
+
     private LayoutInflater layoutInflater;
     private int currentTheme;
-
     private RecyclerView multiTaskLayout;
 
     @Override
