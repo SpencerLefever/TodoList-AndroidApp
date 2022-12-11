@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,10 +20,11 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 import android.media.MediaPlayer;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayoutRecyclerViewAdapter.MyViewHolder> {
+public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayoutRecyclerViewAdapter.MyViewHolder> implements MoveTaskTouchHelperCallback.ItemTouchHelperContract {
     static Context context;
     static User user;
     static int theme;
@@ -55,6 +58,30 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
     @Override
     public int getItemCount() {
         return user.getTaskArray().size();
+    }
+
+    @Override
+    public void onRowMoved(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                user.swap(i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                user.swap(i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onRowSelected(MyViewHolder myViewHolder) {
+        myViewHolder.itemView.setBackgroundResource(R.drawable.task_border_selected);
+    }
+
+    @Override
+    public void onRowClear(MyViewHolder myViewHolder) {
+        myViewHolder.itemView.setBackgroundResource(R.drawable.task_border);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -98,7 +125,6 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
                         float deltaX = x2 - x1;
                         if (Math.abs(deltaX) > MIN_DISTANCE)
                         {
-                            Toast.makeText(context, "Left->Right", Toast.LENGTH_SHORT).show ();
                             completeTask(view);
                             return true;
                         }
@@ -119,7 +145,6 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
                         float deltaX = x2 - x1;
                         if (Math.abs(deltaX) > MIN_DISTANCE)
                         {
-                            Toast.makeText(context, "Right->Left", Toast.LENGTH_SHORT).show ();
                             deleteTask(view);
                             return true;
                         }

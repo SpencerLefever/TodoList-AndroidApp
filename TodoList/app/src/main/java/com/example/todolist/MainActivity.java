@@ -1,6 +1,7 @@
 package com.example.todolist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
@@ -36,11 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         updateModel();
 
-        //Update view
-        multiTaskLayout = findViewById(R.id.MultiTaskLayout);
-        TaskLayoutRecyclerViewAdapter adapter = new TaskLayoutRecyclerViewAdapter(this, user, currentTheme);
-        multiTaskLayout.setAdapter(adapter);
-        multiTaskLayout.setLayoutManager(new LinearLayoutManager(this));
+        initRecyclerView();
 
 
         layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(settingsOnClickListener);
         addTaskButton.setOnClickListener(addTaskOnClickListener);
     } //End of onCreate()
+
+    public void initRecyclerView() {
+        //Update view
+        multiTaskLayout = findViewById(R.id.MultiTaskLayout);
+        TaskLayoutRecyclerViewAdapter adapter = new TaskLayoutRecyclerViewAdapter(this, user, currentTheme);
+        MoveTaskTouchHelperCallback callback = new MoveTaskTouchHelperCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(multiTaskLayout);
+        multiTaskLayout.setAdapter(adapter);
+        multiTaskLayout.setLayoutManager(new LinearLayoutManager(this));
+    }
 
     public void updateModel() {
         Intent intent = getIntent();

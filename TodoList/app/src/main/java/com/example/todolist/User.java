@@ -5,22 +5,17 @@ import android.graphics.Typeface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class User {
     private static User instance = null;
 
     ArrayList taskArray;
     final int MAXTASKS = 20;
-    Typeface typeface;
-    Color backgroundColor;
 
     private User() {
 
         taskArray = new ArrayList<Task>();
-
-
-        //Add default task to the list
-        //addBaseTask();
     }
 
     public static User getInstance() {
@@ -28,23 +23,6 @@ public class User {
             instance = new User();
         }
         return instance;
-    }
-
-    private void addBaseTask() {
-        //Call constructor
-        String title = "Basic Task";
-        String description = "Basic task created as default task for user to see layout";
-        String type = "Personal";
-        String color = "null";
-//        Task baseTask = new Task(title, description, type);
-//
-//        //Add task to the list
-//        taskArray.add(baseTask);
-
-    }
-
-    public Task getBaseTask() {
-        return (Task) taskArray.get(0);
     }
 
     public void addTask(Task t) {
@@ -55,6 +33,12 @@ public class User {
         }
     }
 
+    public void moveTask(Task task, int index) {
+        Task taskBuf = task;
+        removeTask(task);
+        taskArray.add(index, taskBuf);
+    }
+
     public void removeTask(Task t) {
         taskArray.remove(t);
     }
@@ -62,6 +46,10 @@ public class User {
     public Task getTask(Task t) {
         int index = taskArray.indexOf(t);
         return (Task) taskArray.get(index);
+    }
+
+    public void swap(int index1, int index2) {
+        Collections.swap(getTaskArray(), index1, index2);
     }
 
     public Task getTaskByIndex(int i) {
