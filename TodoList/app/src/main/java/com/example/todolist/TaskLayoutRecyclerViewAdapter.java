@@ -158,7 +158,6 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
 
         public void completeTask(View view) {
             Animation completeAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_out_right);
-            completeAnimation.setDuration(500);
             view.startAnimation(completeAnimation);
             removeAt(getAdapterPosition());
             taskCompletedAudio.start();
@@ -166,7 +165,6 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
 
         public void deleteTask(View view) {
             Animation deleteAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_out_left);
-            deleteAnimation.setDuration(500);
             view.startAnimation(deleteAnimation);
             removeAt(getAdapterPosition());
             removeTaskAudio.start();
