@@ -2,12 +2,20 @@ package com.example.todolist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import java.io.Serializable;
 import android.media.MediaPlayer;
 
 public class AddTaskActivity extends AppCompatActivity {
@@ -17,6 +25,7 @@ public class AddTaskActivity extends AppCompatActivity {
     Button confirmButton;
     EditText titleTextBox;
     EditText descriptionTextBox;
+    Task newTask;
     int theme;
     // Media player for add task sound
     MediaPlayer taskAdded;
@@ -68,7 +77,7 @@ public class AddTaskActivity extends AppCompatActivity {
             //Go to main task
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
-            //Add new task and theme to intent
+            //Add bundle object to intent extras
             intent.putExtra("NewTask", newTask);
             intent.putExtra("Theme", theme);
 
@@ -83,20 +92,12 @@ public class AddTaskActivity extends AppCompatActivity {
 
         private Task createTask() {
             Task newTask;
-            boolean inputValidation;
             //Get title and description text
             String title = String.valueOf(titleTextBox.getText());
             String description = String.valueOf(descriptionTextBox.getText());
             String taskType;
             RadioButton selectedButton;
 
-            //Boolean to check for empty text fields and no button pressed in radio group
-            inputValidation = title.equals("") || description.equals("") || (taskTypeButtonGroup.getCheckedRadioButtonId() == -1);
-
-            //Return null task if input is invalid
-            if(inputValidation) {
-                return null;
-            }
             //Get the type of task based on radio group
             int selectedButtonId = taskTypeButtonGroup.getCheckedRadioButtonId();
             //Get button that was selected

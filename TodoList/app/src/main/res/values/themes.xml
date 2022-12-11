@@ -49,4 +49,25 @@
         <item name="colorOnPrimary">@color/white</item>
     </style>
 
+    <style name="Theme.Christmas" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@color/darkgreen</item>
+        <item name="android:textColor">@color/lightred</item>
+        <item name="colorPrimary">@color/lightred</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="Theme.Thanksgiving" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@color/brown</item>
+        <item name="android:textColor">@color/orange</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="Theme.Winter" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@color/lightblue</item>
+        <item name="android:textColor">@color/navy</item>
+        <item name="colorPrimary">@color/navy</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
 </resources>

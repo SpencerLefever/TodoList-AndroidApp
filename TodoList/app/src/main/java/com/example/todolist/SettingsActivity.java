@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.graphics.fonts.Font;
 import android.graphics.fonts.FontFamily;
 import android.graphics.fonts.FontStyle;
@@ -23,6 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
     TextView fonts;
     TextView themes;
     Button backButton;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class SettingsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.Back);
 
         backButton.setOnClickListener(backButtonOnClickListener);
+
+        relativeLayout = (RelativeLayout) findViewById(R.id.rl);
     }
 
     public void red(View view){
@@ -68,16 +72,22 @@ public class SettingsActivity extends AppCompatActivity {
         recreate();
     }
 
-    public void serif(View view){
-        settings.setTypeface(Typeface.SERIF);
-        themes.setTypeface(Typeface.SERIF);
-        fonts.setTypeface(Typeface.SERIF);
+    public void christmas(View view){
+        theme=R.style.Theme_Christmas;
+        getIntent().putExtra("Theme", theme);
+        recreate();
     }
 
-    public void monospace(View view){
-        settings.setTypeface(Typeface.MONOSPACE);
-        themes.setTypeface(Typeface.MONOSPACE);
-        fonts.setTypeface(Typeface.MONOSPACE);
+    public void thanksgiving(View view){
+        theme=R.style.Theme_Thanksgiving;
+        getIntent().putExtra("Theme", theme);
+        recreate();
+    }
+
+    public void winter(View view){
+        theme=R.style.Theme_Winter;
+        getIntent().putExtra("Theme", theme);
+        recreate();
     }
 
     //Go back to main page when back button is clicked

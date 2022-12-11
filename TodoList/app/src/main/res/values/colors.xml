@@ -12,4 +12,10 @@
     <color name="green">#00FF00</color>
     <color name="yellow">#F0FF00</color>
     <color name="magenta">#FF00F0</color>
+    <color name="darkgreen">#4F7942</color>
+    <color name="lightred">#D2042D</color>
+    <color name="brown">#9c5708</color>
+    <color name="orange">#f47b20</color>
+    <color name="lightblue">#38B0DE</color>
+    <color name="navy">#325C74</color>
 </resources>
