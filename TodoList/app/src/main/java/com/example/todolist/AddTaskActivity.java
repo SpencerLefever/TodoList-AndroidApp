@@ -92,11 +92,20 @@ public class AddTaskActivity extends AppCompatActivity {
 
         private Task createTask() {
             Task newTask;
+            boolean inputValidation;
             //Get title and description text
             String title = String.valueOf(titleTextBox.getText());
             String description = String.valueOf(descriptionTextBox.getText());
             String taskType;
             RadioButton selectedButton;
+
+            //Boolean to check for empty text fields and no button pressed in radio group
+            inputValidation = title.equals("") || description.equals("") || (taskTypeButtonGroup.getCheckedRadioButtonId() == -1);
+
+            //Return null task if input is invalid
+            if(inputValidation) {
+                return null;
+            }
 
             //Get the type of task based on radio group
             int selectedButtonId = taskTypeButtonGroup.getCheckedRadioButtonId();
