@@ -160,83 +160,83 @@
     </RadioGroup>
 
 
-    <TextView
+<!--    <TextView-->
 
-        android:id="@+id/textView3"
+<!--        android:id="@+id/textView3"-->
 
-        android:layout_width="wrap_content"
+<!--        android:layout_width="wrap_content"-->
 
-        android:layout_height="wrap_content"
+<!--        android:layout_height="wrap_content"-->
 
-        android:layout_alignParentStart="true"
+<!--        android:layout_alignParentStart="true"-->
 
-        android:layout_alignParentTop="true"
+<!--        android:layout_alignParentTop="true"-->
 
-        android:layout_marginStart="17dp"
+<!--        android:layout_marginStart="17dp"-->
 
-        android:layout_marginTop="450dp"
+<!--        android:layout_marginTop="450dp"-->
 
-        android:text="Seasonal Themes"
+<!--        android:text="Seasonal Themes"-->
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
 
-        android:textSize="34sp" />
+<!--        android:textSize="34sp" />-->
 
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="500dp">
+<!--    <RadioGroup-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="17dp"-->
+<!--        android:layout_marginTop="500dp">-->
 
-        <RadioButton
+<!--        <RadioButton-->
 
-            android:id="@+id/christmas"
+<!--            android:id="@+id/christmas"-->
 
-            android:layout_width="wrap_content"
+<!--            android:layout_width="wrap_content"-->
 
-            android:layout_height="wrap_content"
+<!--            android:layout_height="wrap_content"-->
 
-            android:onClick="christmas"
+<!--            android:onClick="christmas"-->
 
-            android:text="Christmas" />
+<!--            android:text="Christmas" />-->
 
-        <RadioButton
+<!--        <RadioButton-->
 
-            android:id="@+id/thanksgiving"
+<!--            android:id="@+id/thanksgiving"-->
 
-            android:layout_width="wrap_content"
+<!--            android:layout_width="wrap_content"-->
 
-            android:layout_height="wrap_content"
+<!--            android:layout_height="wrap_content"-->
 
-            android:onClick="thanksgiving"
+<!--            android:onClick="thanksgiving"-->
 
-            android:text="Thanksgiving" />
+<!--            android:text="Thanksgiving" />-->
 
-        <RadioButton
+<!--        <RadioButton-->
 
-            android:id="@+id/winter"
+<!--            android:id="@+id/winter"-->
 
-            android:layout_width="wrap_content"
+<!--            android:layout_width="wrap_content"-->
 
-            android:layout_height="wrap_content"
+<!--            android:layout_height="wrap_content"-->
 
-            android:onClick="winter"
+<!--            android:onClick="winter"-->
 
-            android:text="Winter" />
+<!--            android:text="Winter" />-->
 
-        <RadioButton
+<!--        <RadioButton-->
 
-            android:id="@+id/default2"
+<!--            android:id="@+id/default2"-->
 
-            android:layout_width="wrap_content"
+<!--            android:layout_width="wrap_content"-->
 
-            android:layout_height="wrap_content"
+<!--            android:layout_height="wrap_content"-->
 
-            android:onClick="white"
+<!--            android:onClick="white"-->
 
-            android:text="Default" />
-    </RadioGroup>
+<!--            android:text="Default" />-->
+<!--    </RadioGroup>-->
 
 
 </RelativeLayout>

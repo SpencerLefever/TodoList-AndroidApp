@@ -20,9 +20,6 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
     int theme;
-    TextView settings;
-    TextView fonts;
-    TextView themes;
     Button backButton;
     RelativeLayout relativeLayout;
 
@@ -32,9 +29,6 @@ public class SettingsActivity extends AppCompatActivity {
         setTheme(theme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        settings = (TextView) findViewById(R.id.textView);
-        fonts = (TextView) findViewById(R.id.textView2);
-        themes = (TextView) findViewById(R.id.textView3);
         backButton = findViewById(R.id.Back);
 
         backButton.setOnClickListener(backButtonOnClickListener);
