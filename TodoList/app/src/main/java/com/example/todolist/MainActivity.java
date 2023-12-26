@@ -51,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
         addTaskButton.setOnClickListener(addTaskOnClickListener);
     } //End of onCreate()
 
+
+    //TODO Make User serializable to be able to grab from savedInstanceState
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        user = savedInstanceState.getParcelable("");
+    }
+
     public void initRecyclerView() {
         //Update view
         multiTaskLayout = findViewById(R.id.MultiTaskLayout);
@@ -84,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     };
-
-    //TODO Animate the taskLayout view to swipe either left or right based on deletion or completion
 
     //Go to settings page when settings button is clicked
     private final View.OnClickListener settingsOnClickListener = new View.OnClickListener() {

@@ -31,7 +31,7 @@ public class TaskLayoutRecyclerViewAdapter extends RecyclerView.Adapter<TaskLayo
     float x1, x2;   //Holds swipe start and end position
     static final int MIN_DISTANCE = 250;
 
-
+    //TODO make the task layout a fixed size so tasks with larger title do not inflate the view
     public TaskLayoutRecyclerViewAdapter(Context context, User user, int theme) {
         this.context = context;
         this.user = user;

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MoveTaskTouchHelperCallback extends ItemTouchHelper.Callback {
-
+    //TODO popup message to confirm compeltion or deletion of a task
     private final ItemTouchHelperContract adapter;
     public MoveTaskTouchHelperCallback(ItemTouchHelperContract adapter) {
         this.adapter = adapter;

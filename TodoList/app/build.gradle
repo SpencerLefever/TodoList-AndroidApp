@@ -1,15 +1,18 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
     namespace 'com.example.todolist'
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.todolist"
         minSdk 21
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -26,6 +29,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    hilt {
+        enableAggregatingTask = true
+    }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -37,4 +53,16 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    kapt "androidx.hilt:hilt-compiler:$kaptHiltCompilerVersion"
+    implementation("com.google.dagger:hilt-android:${hiltVersion}")
+    kapt("com.google.dagger:hilt-android-compiler:${hiltVersion}")
+    kapt("com.google.dagger:hilt-compiler:${hiltVersion}")
+    implementation("androidx.hilt:hilt-work:${hiltWorkVersion}")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}")
+    implementation "androidx.fragment:fragment-ktx:${fragmentKtxVersion}"
+    kapt "com.android.databinding:compiler:7.3.1"
+
+    implementation project(path: ':features:tasks')
 }
