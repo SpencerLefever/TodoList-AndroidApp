@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewState"
+            type="com.example.home.HomeViewState" />
+        <variable
+            name="viewModel"
+            type="com.example.home.HomeViewModel" />
+    </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alignItems="center"
+            app:flexDirection="column"
+            app:flexWrap="wrap"
+            app:justifyContent="flex_start">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/todo_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/todo"
+                    android:textColor="@color/inky"
+                    android:textSize="54sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="15dp"/>
+                <Button
+                    android:id="@+id/settings_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/icons8_settings"
+                    android:backgroundTint="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:onClick="@{() -> viewModel.settingButtonPressed()}"/>
+
+                <Button
+                    android:id="@+id/filter_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/baseline_filter"
+                    android:backgroundTint="@color/transparent"
+                    app:layout_constraintEnd_toStartOf="@id/settings_button"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="15dp"
+                    android:onClick="@{() -> viewModel.filterButtonPressed()}"/>
+
+
+                <TextView
+                    android:id="@+id/tasks_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tasks"
+                    android:textSize="30sp"
+                    android:textColor="@color/inky"
+                    app:layout_constraintTop_toBottomOf="@id/todo_header"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"/>
+
+                <Button
+                    android:id="@+id/add_task_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/baseline_add"
+                    android:backgroundTint="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/todo_header"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:onClick="@{() -> viewModel.addTaskButtonPressed()}"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/task_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/task_layout"/>
+        </com.google.android.flexbox.FlexboxLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

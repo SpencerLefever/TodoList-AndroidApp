@@ -1,14 +1,19 @@
-package com.example.todolist
+package com.example.service
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.tasks.Task
 import com.example.tasks.TaskTypeEnum
 import java.util.Collections
 
 
 //TODO implement sql and add Entity annotation
+@Entity
 data class User(
-    var tasks: MutableList<Task>,
-    var taskTypes: MutableList<TaskTypeEnum>
+    @PrimaryKey val uid: Int,
+    @ColumnInfo(name = "tasks") var tasks: MutableList<Task>,
+    @ColumnInfo(name = "taskTypes") var taskTypes: MutableList<TaskTypeEnum>
 )
 
 fun User.addTask(task: Task) {
@@ -36,6 +41,6 @@ fun User.getTaskByTitle(title: String): List<Task> {
 }
 
 fun User.getTasksByType(type: String): List<Task> {
-    return tasks.filter { it.type == type}
+    return tasks.filter { it.type?.name == type}
 }
 

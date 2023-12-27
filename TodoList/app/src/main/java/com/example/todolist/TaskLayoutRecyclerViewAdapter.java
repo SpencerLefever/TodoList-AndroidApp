@@ -2,25 +2,18 @@ package com.example.todolist;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
 import android.media.MediaPlayer;
 
-import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 

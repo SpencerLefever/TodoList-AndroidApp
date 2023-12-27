@@ -10,7 +10,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel(){
 
     //TODO fetch user from local db
-    val user = User(mutableListOf(), mutableListOf())
+    val user = com.example.service.User(mutableListOf(), mutableListOf())
 
 
 

@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -63,6 +64,16 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}")
     implementation "androidx.fragment:fragment-ktx:${fragmentKtxVersion}"
     kapt "com.android.databinding:compiler:7.3.1"
+    implementation "androidx.navigation:navigation-fragment-ktx:${navVersion}"
+    implementation "androidx.navigation:navigation-ui-ktx:${navVersion}"
+
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "androidx.room:room-rxjava3:$roomVersion"
+    implementation "androidx.room:room-guava:$roomVersion"
+    testImplementation "androidx.room:room-testing:$roomVersion"
+    implementation "androidx.room:room-paging:$roomVersion"
 
     implementation project(path: ':features:tasks')
+    implementation "com.google.android.flexbox:flexbox:${flexboxVersion}"
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewState"
+            type="com.example.settings.SettingsViewState" />
+        <variable
+            name="viewModel"
+            type="com.example.settings.SettingsViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:icon="@android:drawable/ic_menu_revert"
+            app:iconTint="@color/inky"
+            android:text="@string/back"
+            android:textSize="16sp"
+            android:textColor="@color/inky"
+            android:backgroundTint="@color/transparent"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:onClick="@{() -> viewModel.closeButtonPressed()}"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/save"
+            android:textSize="16sp"
+            android:textColor="@color/inky"
+            android:backgroundTint="@color/transparent"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:onClick="@{() -> viewModel.saveButtonPressed()}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
