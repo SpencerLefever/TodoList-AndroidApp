@@ -1,11 +1,9 @@
-package com.example.tasks
+package com.example.tasks.addtask
 
-import android.content.Context
-import android.graphics.Color
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.core.view.marginTop
 import androidx.databinding.BindingAdapter
+import com.example.tasks.R
 
 @BindingAdapter("setTaskRadioGroup")
 fun setTaskRadioGroup(radioGroup: RadioGroup, viewState: AddTaskViewState) {

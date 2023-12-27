@@ -4,10 +4,10 @@
     <data>
         <variable
             name="viewState"
-            type="com.example.tasks.AddTaskViewState" />
+            type="com.example.tasks.addtask.AddTaskViewState" />
         <variable
             name="viewModel"
-            type="com.example.tasks.AddTaskViewModel" />
+            type="com.example.tasks.addtask.AddTaskViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

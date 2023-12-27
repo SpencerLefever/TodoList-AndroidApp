@@ -1,4 +1,4 @@
-package com.example.tasks
+package com.example.tasks.addtask
 
 sealed class AddTaskViewEvent {
     object Close: AddTaskViewEvent()

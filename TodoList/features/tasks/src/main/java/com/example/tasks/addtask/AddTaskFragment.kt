@@ -1,4 +1,4 @@
-package com.example.tasks
+package com.example.tasks.addtask
 
 import android.os.Bundle
 import android.view.LayoutInflater
