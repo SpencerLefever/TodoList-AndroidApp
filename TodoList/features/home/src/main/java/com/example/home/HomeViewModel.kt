@@ -66,13 +66,13 @@ class HomeViewModel @Inject constructor(
         _viewEvent.emit(HomeViewEvent.ExpandTask)
     }
 
-    fun deleteTask(task: Task) {
+    fun deleteTask(task: Task?) {
         user.tasks.remove(task)
         userDao.updateUser(user)
     }
 
-    fun completeTask(task: Task) {
-        user.tasks.find { it.title == task.title }?.completed = false
+    fun updateCompleteTaskValue(task: Task?, completed: Boolean) {
+        user.tasks.find { it.title == task?.title }?.completed = completed
         userDao.updateUser(user)
     }
 }

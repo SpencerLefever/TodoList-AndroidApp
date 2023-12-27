@@ -23,7 +23,7 @@ class HomeBindingAdapter(
     private val viewState: HomeViewState,
     private val taskList: MutableList<Task> = getTaskList(viewState)
 ) : RecyclerView.Adapter<HomeBindingAdapter.HomeViewHolder>(){
-
+    private lateinit var listener : OnItemClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding: ViewDataBinding =
             DataBindingUtil.inflate(
@@ -32,7 +32,7 @@ class HomeBindingAdapter(
                 parent,
                 false
             )
-        return HomeViewHolder(binding)
+        return HomeViewHolder(binding, listener)
     }
 
     override fun getItemCount(): Int {
@@ -44,6 +44,15 @@ class HomeBindingAdapter(
 
         holder.taskTitle.text = currentTask.title
         holder.dateText.text = currentTask.date.toString()
+        holder.taskDeleteButton.setOnClickListener {
+            listener.onItemClick(position)
+        }
+        holder.taskCheckBox.setOnClickListener {
+            listener.onItemClick(position)
+        }
+        holder.taskTitle.setOnClickListener {
+            listener.onItemClick(position)
+        }
         if(holder.taskCheckBox.isChecked) {
             viewState.tasks[position].completed = true
             holder.taskTitle.foreground = AppCompatResources.getDrawable(context, R.drawable.strikethrough_text)
@@ -53,11 +62,21 @@ class HomeBindingAdapter(
         }
     }
 
-    class HomeViewHolder(binding: ViewDataBinding) :
+    class HomeViewHolder(binding: ViewDataBinding, listener: OnItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
             val view = binding as TaskLayoutBinding
             val taskTitle: TextView = view.taskTitle
             val dateText: TextView = view.dateText
             val taskCheckBox: CheckBox = view.taskCheckbox
+            val taskDeleteButton: Button = view.deleteButton
+
     }
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
 }

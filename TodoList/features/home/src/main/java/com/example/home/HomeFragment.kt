@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.home.databinding.FragmentHomeBinding
 import com.example.tasks.Task
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
     companion object {
         const val TAG = "HomeFragment"
@@ -18,6 +18,8 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var fragmentHomeBinding: FragmentHomeBinding
+
+    private var position: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,12 +92,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun completeTask() {
-        //Add line through task title
-
+        //Update db
+        val task: Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
+        homeViewModel.updateCompleteTaskValue(task, true)
+        //Update ui
+        fragmentHomeBinding.taskRv.adapter?.notifyItemChanged(position)
     }
 
     private fun revertCompleteTask() {
         //Remove line through task title
+        val task: Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
+        homeViewModel.updateCompleteTaskValue(task, false)
+        fragmentHomeBinding.taskRv.adapter?.notifyItemChanged(position)
     }
 
     private fun navigateToAddTaskScreen() {
@@ -103,7 +111,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun deleteTask() {
-        val task: Task =
-        homeViewModel.deleteTask(task)
+        //Update db
+        homeViewModel.deleteTask(homeViewModel.viewState.value?.peekContent()?.tasks?.get(position))
+
+        //Update ui
+        fragmentHomeBinding.taskRv.adapter?.notifyItemRemoved(position)
+        homeViewModel.viewState.value?.peekContent()?.tasks?.size?.let {
+            fragmentHomeBinding.taskRv.adapter?.notifyItemRangeChanged(
+                position,
+                it
+            )
+        }
+    }
+
+    override fun onItemClick(position: Int) {
+        this.position = position
     }
 }
