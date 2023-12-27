@@ -48,6 +48,7 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:${hiltVersion}")
     implementation("androidx.hilt:hilt-work:${hiltWorkVersion}")
     implementation "com.google.android.flexbox:flexbox:${flexboxVersion}"
+    implementation "androidx.fragment:fragment-ktx:${fragmentKtxVersion}"
     implementation project (path: ':service')
     implementation project(path: ':features:tasks')
 }

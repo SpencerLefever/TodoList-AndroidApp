@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.tasks.databinding.FragmentAddTaskBinding
-import kotlin.contracts.contract
 
 class AddTaskFragment : Fragment() {
 
@@ -36,12 +35,11 @@ class AddTaskFragment : Fragment() {
         addTaskViewModel.viewEvent.observe(viewLifecycleOwner) {
             when(it.getContentIfNotHandled()) {
                 is AddTaskViewEvent.Close -> {
-                    //Navigate back to home
                     navigateToHomeScreen()
                 }
                 is AddTaskViewEvent.Save -> {
-                    //Navigate back to home with saved task
                     saveTask()
+                    navigateToHomeScreen()
                 }
                 else -> {}
             }

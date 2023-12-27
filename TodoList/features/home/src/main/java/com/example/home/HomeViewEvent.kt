@@ -6,4 +6,12 @@ sealed class HomeViewEvent {
     object Filter: HomeViewEvent()
 
     object Settings: HomeViewEvent()
+
+    object CompleteTask: HomeViewEvent()
+
+    object RemoveCompleteTask: HomeViewEvent()
+
+    object DeleteTask: HomeViewEvent()
+
+    object ExpandTask: HomeViewEvent()
 }

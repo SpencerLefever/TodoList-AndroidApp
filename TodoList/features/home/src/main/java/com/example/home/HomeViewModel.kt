@@ -6,6 +6,7 @@ import com.example.service.MutableLiveEvent
 import com.example.service.emit
 import com.example.service.User
 import com.example.service.UserDao
+import com.example.tasks.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -51,5 +52,27 @@ class HomeViewModel @Inject constructor(
 
     fun addTaskButtonPressed() {
         _viewEvent.emit(HomeViewEvent.AddTask)
+    }
+
+    fun completeTaskPressed() {
+        _viewEvent.emit(HomeViewEvent.CompleteTask)
+    }
+
+    fun deleteTaskPressed() {
+        _viewEvent.emit(HomeViewEvent.DeleteTask)
+    }
+
+    fun expandTaskPressed() {
+        _viewEvent.emit(HomeViewEvent.ExpandTask)
+    }
+
+    fun deleteTask(task: Task) {
+        user.tasks.remove(task)
+        userDao.updateUser(user)
+    }
+
+    fun completeTask(task: Task) {
+        user.tasks.find { it.title == task.title }?.completed = false
+        userDao.updateUser(user)
     }
 }
