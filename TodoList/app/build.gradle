@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.todolist"
-        minSdk 21
+        minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -64,8 +64,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}")
     implementation "androidx.fragment:fragment-ktx:${fragmentKtxVersion}"
     kapt "com.android.databinding:compiler:7.3.1"
-    implementation "androidx.navigation:navigation-fragment-ktx:${navVersion}"
-    implementation "androidx.navigation:navigation-ui-ktx:${navVersion}"
+    api "androidx.navigation:navigation-fragment-ktx:${navVersion}"
+    api "androidx.navigation:navigation-ui-ktx:${navVersion}"
+    api "androidx.navigation:navigation-dynamic-features-fragment:${navVersion}"
 
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
@@ -75,5 +76,8 @@ dependencies {
     implementation "androidx.room:room-paging:$roomVersion"
 
     implementation project(path: ':features:tasks')
+    implementation project(path: ':features:settings')
+    implementation project(path: ':features:home')
+
     implementation "com.google.android.flexbox:flexbox:${flexboxVersion}"
 }

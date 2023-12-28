@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main_graph"
+    app:startDestination="@id/nav_home_graph">
+
+    <include-dynamic
+        android:id="@+id/nav_home_graph"
+        app:moduleName="home"
+        app:graphResName="nav_home_graph"
+        app:graphPackage="com.example.home"/>
+    <include-dynamic
+        android:id="@+id/nav_settings_graph"
+        app:moduleName="settings"
+        app:graphResName="nav_settings_graph"
+        app:graphPackage="com.example.settings"/>
+
+    <fragment
+        app:moduleName="home"
+        android:id="@+id/homeFragment"
+        android:name="com.example.home.HomeFragment"/>
+
+    <fragment
+        app:moduleName="settings"
+        android:id="@+id/settingsFragment"
+        android:name="com.example.settings.SettingsFragment"/>
+
+    <fragment
+        app:moduleName="addTask"
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.tasks.addtask.AddTaskFragment"/>
+
+    <fragment
+        app:moduleName="expandedTask"
+        android:id="@+id/expandedTaskFragment"
+        android:name="com.example.tasks.expandedtask.ExpandedTaskFragment"/>
+
+    <action
+        android:id="@+id/action_home_to_settings_fragment"
+        app:destination="@id/settingsFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+
+    </action>
+
+    <action
+        android:id="@+id/action_home_to_add_task_fragment"
+        app:destination="@id/addTaskFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+    </action>
+
+    <action
+        android:id="@+id/action_home_to_expanded_task_fragment"
+        app:destination="@id/expandedTaskFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+    </action>
+
+    <action
+        android:id="@+id/action_to_home_fragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+    </action>
+
+</navigation>

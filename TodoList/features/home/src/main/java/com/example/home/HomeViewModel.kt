@@ -1,12 +1,12 @@
 package com.example.home
 
 import androidx.lifecycle.ViewModel
-import com.example.service.LiveEvent
-import com.example.service.MutableLiveEvent
-import com.example.service.emit
-import com.example.service.User
-import com.example.service.UserDao
-import com.example.tasks.Task
+import com.example.core.LiveEvent
+import com.example.core.MutableLiveEvent
+import com.example.core.emit
+import com.example.core.user.User
+import com.example.core.user.UserDao
+import com.example.core.task.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject

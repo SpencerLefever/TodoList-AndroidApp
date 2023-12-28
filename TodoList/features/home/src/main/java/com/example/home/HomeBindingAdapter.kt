@@ -1,18 +1,21 @@
 package com.example.home
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.home.databinding.TaskLayoutBinding
-import com.example.tasks.Task
+import com.example.core.task.Task
 
 
 fun getTaskList(viewState: HomeViewState) : MutableList<Task> {
@@ -60,6 +63,8 @@ class HomeBindingAdapter(
             viewState.tasks[position].completed = false
             holder.taskTitle.foreground = null
         }
+        val color: Int? = viewState.taskTypeList[currentTask.type.toString()]?.let { context.getColor(it) }
+        holder.taskLayout.setBackgroundColor(color ?: context.getColor(R.color.inky))
     }
 
     class HomeViewHolder(binding: ViewDataBinding, listener: OnItemClickListener) :
@@ -69,7 +74,7 @@ class HomeBindingAdapter(
             val dateText: TextView = view.dateText
             val taskCheckBox: CheckBox = view.taskCheckbox
             val taskDeleteButton: Button = view.deleteButton
-
+            val taskLayout: ConstraintLayout = view.taskLayout
     }
     interface OnItemClickListener {
         fun onItemClick(position: Int)

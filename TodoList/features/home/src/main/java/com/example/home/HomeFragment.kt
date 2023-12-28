@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.home.databinding.FragmentHomeBinding
-import com.example.tasks.Task
+import com.example.core.task.Task
 
 class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 

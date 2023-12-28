@@ -9,9 +9,10 @@ buildscript {
 
         jacksonDatabindVersion = '2.15.1'
         fragmentKtxVersion = '1.4.1'
-        navVersion = '2.5.2'
+        navVersion = '2.7.6'
         roomVersion = '2.6.1'
         flexboxVersion = '3.0.0'
+        gsonVersion = '2.10.1'
     }
 
     dependencies {

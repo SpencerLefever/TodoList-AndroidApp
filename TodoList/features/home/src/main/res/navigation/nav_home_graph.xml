@@ -5,6 +5,8 @@
     android:id="@+id/nav_home_graph"
     app:startDestination="@id/homeFragment">
     <include app:graph="@navigation/nav_settings_graph"/>
+    <include app:graph="@navigation/nav_add_task_graph"/>
+    <include app:graph="@navigation/nav_expanded_task_graph"/>
 
     <fragment
         android:id="@+id/homeFragment"
@@ -36,6 +38,39 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim">
 
+        <argument
+            android:name="taskKey"
+            app:argType="com.example.core.task.Task"/>
     </action>
+
+    <action
+        android:id="@+id/action_expanded_task_fragment_to_home_fragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+        <argument
+            android:name="taskKey"
+            app:argType="com.example.core.task.Task" />
+    </action>
+
+    <action
+        android:id="@+id/action_settings_fragment_to_home_fragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+
+    </action>
+
+    <action
+        android:id="@+id/action_add_task_fragment_to_home_fragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+
+        <argument
+            android:name="taskKey"
+            app:argType="com.example.core.task.Task"/>
+    </action>
+
 
 </navigation>

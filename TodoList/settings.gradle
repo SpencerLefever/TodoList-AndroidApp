@@ -16,6 +16,6 @@ rootProject.name = "TodoList"
 include ':app'
 include ':features'
 include ':features:tasks'
-include ':service'
+include ':core'
 include ':features:settings'
 include ':features:home'
