@@ -5,11 +5,23 @@
     android:id="@+id/nav_add_task_graph"
     app:startDestination="@id/addTaskFragment">
 
+    <include app:graph="@navigation/nav_home_graph"/>
+
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="com.example.tasks.addtask.AddTaskFragment"
         android:label="fragment_add_task"
         tools:layout="@layout/fragment_add_task">
-
     </fragment>
+
+    <action
+        android:id="@+id/action_add_task_fragment_to_home_fragment"
+        app:destination="@id/nav_home_graph"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+        <argument
+            android:name="taskKey"
+            app:argType="com.example.task.Task"/>
+    </action>
+
 </navigation>

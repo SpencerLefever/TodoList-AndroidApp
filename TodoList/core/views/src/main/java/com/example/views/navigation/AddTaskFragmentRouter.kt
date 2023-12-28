@@ -1,7 +1,7 @@
-package com.example.home.navigation
+package com.example.views.navigation
 
 import androidx.navigation.NavController
 
-interface HomeFragmentRouter {
+interface AddTaskFragmentRouter {
     fun show(navController: NavController)
 }

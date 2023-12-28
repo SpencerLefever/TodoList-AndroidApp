@@ -1,4 +1,4 @@
-package com.example.settings.navigation
+package com.example.views.navigation
 
 import androidx.navigation.NavController
 

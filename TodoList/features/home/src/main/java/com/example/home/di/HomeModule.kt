@@ -1,6 +1,6 @@
 package com.example.home.di
 
-import com.example.home.navigation.HomeFragmentRouter
+import com.example.views.navigation.HomeFragmentRouter
 import com.example.home.navigation.HomeFragmentRouterImpl
 import dagger.Module
 import dagger.Provides

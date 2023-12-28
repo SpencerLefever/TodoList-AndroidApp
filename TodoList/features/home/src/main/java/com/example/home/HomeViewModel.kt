@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
 
     val viewEvent: LiveEvent<HomeViewEvent> get() = _viewEvent
 
-    private lateinit var user: User
+    private var user: User
 
     init {
         runBlocking {

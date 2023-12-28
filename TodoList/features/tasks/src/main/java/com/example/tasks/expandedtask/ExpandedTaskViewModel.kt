@@ -24,13 +24,11 @@ class ExpandedTaskViewModel @Inject constructor(
 
     val viewEvent: LiveEvent<ExpandedTaskViewEvent> get() = _viewEvent
 
-//    init {
-//        _viewState.emit(
-//            ExpandedTaskViewState(
-//                //Get task from navargs
-//            )
-//        )
-//    }
+    fun emitInitialViewState(viewState: ExpandedTaskViewState) {
+        _viewState.emit(
+            viewState
+        )
+    }
 
     fun backButtonPressed() {
         _viewEvent.emit(ExpandedTaskViewEvent.Close)

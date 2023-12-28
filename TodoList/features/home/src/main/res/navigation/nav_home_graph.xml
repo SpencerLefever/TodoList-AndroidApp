@@ -15,6 +15,9 @@
         tools:layout="@layout/fragment_home"
         app:popUpTo="@id/homeFragment"
         app:popUpToInclusive="true">
+        <argument
+            android:name="taskKey"
+            app:argType="com.example.task.Task"/>
     </fragment>
 
     <action
@@ -42,35 +45,5 @@
             android:name="taskKey"
             app:argType="com.example.task.Task"/>
     </action>
-
-    <action
-        android:id="@+id/action_expanded_task_fragment_to_home_fragment"
-        app:destination="@id/homeFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim">
-        <argument
-            android:name="taskKey"
-            app:argType="com.example.task.Task" />
-    </action>
-
-    <action
-        android:id="@+id/action_settings_fragment_to_home_fragment"
-        app:destination="@id/homeFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim">
-
-    </action>
-
-    <action
-        android:id="@+id/action_add_task_fragment_to_home_fragment"
-        app:destination="@id/homeFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim">
-
-        <argument
-            android:name="taskKey"
-            app:argType="com.example.task.Task"/>
-    </action>
-
 
 </navigation>

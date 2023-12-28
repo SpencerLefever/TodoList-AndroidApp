@@ -1,6 +1,6 @@
 package com.example.tasks.expandedtask.di
 
-import com.example.tasks.expandedtask.navigation.ExpandedTaskFragmentRouter
+import com.example.views.navigation.ExpandedTaskFragmentRouter
 import com.example.tasks.expandedtask.navigation.ExpandedTaskFragmentRouterImpl
 import dagger.Module
 import dagger.Provides

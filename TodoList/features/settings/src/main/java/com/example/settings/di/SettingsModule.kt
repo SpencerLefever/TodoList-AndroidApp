@@ -1,6 +1,6 @@
 package com.example.settings.di
 
-import com.example.settings.navigation.SettingsFragmentRouter
+import com.example.views.navigation.SettingsFragmentRouter
 import com.example.settings.navigation.SettingsFragmentaRouterImpl
 import dagger.Module
 import dagger.Provides
