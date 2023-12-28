@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.home.databinding.FragmentHomeBinding
-import com.example.core.task.Task
+import com.example.task.Task
 
 class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
@@ -25,7 +25,7 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return fragmentHomeBinding.root
@@ -93,7 +93,7 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
     private fun completeTask() {
         //Update db
-        val task: Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
+        val task: com.example.task.Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
         homeViewModel.updateCompleteTaskValue(task, true)
         //Update ui
         fragmentHomeBinding.taskRv.adapter?.notifyItemChanged(position)
@@ -101,7 +101,7 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
     private fun revertCompleteTask() {
         //Remove line through task title
-        val task: Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
+        val task: com.example.task.Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
         homeViewModel.updateCompleteTaskValue(task, false)
         fragmentHomeBinding.taskRv.adapter?.notifyItemChanged(position)
     }

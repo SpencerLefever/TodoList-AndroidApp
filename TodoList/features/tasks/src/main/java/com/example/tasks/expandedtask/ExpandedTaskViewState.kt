@@ -1,7 +1,7 @@
 package com.example.tasks.expandedtask
 
-import com.example.core.task.Task
+import com.example.task.Task
 
 data class ExpandedTaskViewState (
-    val task: Task
+    val task: com.example.task.Task
 )

@@ -1,6 +1,6 @@
 package com.example.settings
 
-import com.example.core.task.TaskTypeEnum
+import com.example.task.TaskTypeEnum
 
 data class SettingsViewState(
     val darkMode: Boolean = false,

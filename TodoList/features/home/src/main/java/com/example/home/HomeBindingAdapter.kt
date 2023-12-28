@@ -1,9 +1,6 @@
 package com.example.home
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
@@ -15,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.home.databinding.TaskLayoutBinding
-import com.example.core.task.Task
+import com.example.task.Task
 
 
 fun getTaskList(viewState: HomeViewState) : MutableList<Task> {
@@ -58,7 +55,7 @@ class HomeBindingAdapter(
         }
         if(holder.taskCheckBox.isChecked) {
             viewState.tasks[position].completed = true
-            holder.taskTitle.foreground = AppCompatResources.getDrawable(context, R.drawable.strikethrough_text)
+            holder.taskTitle.foreground = AppCompatResources.getDrawable(context, com.example.common_libs.R.drawable.strikethrough_text)
         } else {
             viewState.tasks[position].completed = false
             holder.taskTitle.foreground = null

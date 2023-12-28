@@ -1,19 +1,19 @@
 package com.example.home
 
 import androidx.lifecycle.ViewModel
-import com.example.core.LiveEvent
-import com.example.core.MutableLiveEvent
-import com.example.core.emit
-import com.example.core.user.User
-import com.example.core.user.UserDao
-import com.example.core.task.Task
+import com.example.task.Task
+import com.example.user.User
+import com.example.user.UserDao
+import com.example.views.baselivedata.LiveEvent
+import com.example.views.baselivedata.MutableLiveEvent
+import com.example.views.baselivedata.emit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val userDao: UserDao
+    private val userDao: UserDao
 ) : ViewModel() {
 
     companion object {

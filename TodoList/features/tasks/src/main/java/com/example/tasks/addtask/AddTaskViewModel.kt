@@ -2,9 +2,9 @@ package com.example.tasks.addtask
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.core.LiveEvent
-import com.example.core.MutableLiveEvent
-import com.example.core.emit
+import com.example.views.baselivedata.LiveEvent
+import com.example.views.baselivedata.MutableLiveEvent
+import com.example.views.baselivedata.emit
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
 

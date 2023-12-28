@@ -17,7 +17,7 @@ class AddTaskFragment : Fragment() {
     private val addTaskViewModel: AddTaskViewModel by viewModels()
 
     private lateinit var fragmentAddTaskBinding: FragmentAddTaskBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentAddTaskBinding = FragmentAddTaskBinding.inflate(inflater, container, false)
 
         return fragmentAddTaskBinding.root
