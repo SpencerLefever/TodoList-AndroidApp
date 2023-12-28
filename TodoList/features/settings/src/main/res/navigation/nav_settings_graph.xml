@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_settings_graph"
+    app:startDestination="@id/settingsFragment">
+
+    <include app:graph="@navigation/nav_home_graph"/>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_settings_to_home_fragment"
+        app:destination=""
+</navigation>
