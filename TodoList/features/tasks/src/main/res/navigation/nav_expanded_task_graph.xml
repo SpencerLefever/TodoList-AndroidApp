@@ -11,6 +11,9 @@
         android:name="com.example.tasks.expandedtask.ExpandedTaskFragment"
         android:label="fragment_expanded_task"
         tools:layout="@layout/fragment_expanded_task">
+        <argument
+            android:name="taskKey"
+            app:argType="com.example.task.Task"/>
     </fragment>
 
     <action

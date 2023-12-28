@@ -60,21 +60,21 @@ class AddTaskFragment : Fragment() {
         addTaskViewModel.viewEvent.observe(viewLifecycleOwner) {
             when(it.getContentIfNotHandled()) {
                 is AddTaskViewEvent.Close -> {
-                    navigateToHomeScreen()
+                    back()
                 }
                 is AddTaskViewEvent.Save -> {
-                    saveTaskAndNavigateToHomeScreen()
+                    save()
                 }
                 else -> {}
             }
         }
     }
 
-    private fun navigateToHomeScreen() {
+    private fun back() {
         homeFragmentRouter.showFromAddTask(localController, null)
     }
 
-    private fun saveTaskAndNavigateToHomeScreen() {
+    private fun save() {
         val taskType: Pair<String, Int> = getTaskType()
 
         val task = Task(

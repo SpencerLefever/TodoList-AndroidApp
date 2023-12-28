@@ -11,7 +11,7 @@ class HomeFragmentRouterImpl @Inject constructor() : HomeFragmentRouter {
         navController.navigate(NavMainGraphDirections.actionSettingsFragmentToHomeFragment())
     }
 
-    override fun showFromExpandedTask(navController: NavController, task: Task) {
+    override fun showFromExpandedTask(navController: NavController, task: Task?) {
         navController.navigate(NavMainGraphDirections.actionExpandedTaskFragmentToHomeFragment(task))
     }
 

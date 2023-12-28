@@ -41,7 +41,8 @@
         app:exitAnim="@anim/nav_default_exit_anim">
         <argument
             android:name="taskKey"
-            app:argType="com.example.task.Task" />
+            app:argType="com.example.task.Task"
+            app:nullable="true"/>
     </action>
 
     <action

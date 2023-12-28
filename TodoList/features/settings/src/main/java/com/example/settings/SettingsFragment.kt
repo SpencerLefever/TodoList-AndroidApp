@@ -48,7 +48,6 @@ class SettingsFragment : Fragment() {
             when(it.getContentIfNotHandled()) {
                 is SettingsViewEvent.Save -> {
                     saveSettings()
-                    navigateToHome()
                 }
                 is SettingsViewEvent.Close -> {
                     navigateToHome()
@@ -66,7 +65,8 @@ class SettingsFragment : Fragment() {
         homeFragmentRouter.showFromSettings(localController)
     }
 
+    //TODO provide functionality to save settings when task type settings are created
     private fun saveSettings() {
-
+        homeFragmentRouter.showFromSettings(localController)
     }
 }
