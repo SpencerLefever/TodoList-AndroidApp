@@ -17,7 +17,7 @@ import java.util.Collections
 data class User(
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "tasks") var tasks: MutableList<Task>,
-    @ColumnInfo(name = "taskTypes") var taskTypes: Map<String, Color>
+    @ColumnInfo(name = "taskTypes") var taskTypes: Map<String, Int>
 )
 
 class TaskConverter {
@@ -29,18 +29,18 @@ class TaskConverter {
 
     @TypeConverter
     fun storedStringToTask(taskData: String): List<Task> {
-        val listType = object : TypeToken<List<Task?>?>() {}.type
+        val listType = object : TypeToken<List<Task>>() {}.type
         return gson.fromJson(taskData, listType)
     }
 
     @TypeConverter
-    fun taskEnumToStoredString(taskTypeList: List<String>): String {
+    fun taskEnumToStoredString(taskTypeList: Map<String, Int>): String {
         return gson.toJson(taskTypeList)
     }
 
     @TypeConverter
-    fun storedStringToTaskEnum(taskTypeData: String): List<String> {
-        val listType = object : TypeToken<List<String?>?>() {}.type
+    fun storedStringToTaskEnum(taskTypeData: String): Map<String, Int> {
+        val listType = object : TypeToken<Map<String, Int>>() {}.type
         return gson.fromJson(taskTypeData, listType)
     }
 }

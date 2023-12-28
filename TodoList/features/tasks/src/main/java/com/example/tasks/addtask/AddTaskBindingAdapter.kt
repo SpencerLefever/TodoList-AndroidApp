@@ -8,9 +8,9 @@ import com.example.tasks.R
 @BindingAdapter("setTaskRadioGroup")
 fun setTaskRadioGroup(radioGroup: RadioGroup, viewState: AddTaskViewState) {
     with(radioGroup) {
-        for(item in viewState.taskTypeList) {
+        for(item in viewState.taskTypeMap) {
             val radioButton = RadioButton(context)
-            radioButton.text = item.taskType
+            radioButton.text = item.key
             radioButton.textSize = 20F
             radioButton.setTextColor(resources.getColor(R.color.inky, null))
             radioButton.layoutParams

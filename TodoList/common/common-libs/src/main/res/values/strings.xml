@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">common-libs</string>
+    <string name="back">Back</string>
+    <string name="add_task">Add Task</string>
+    <string name="save">Save</string>
+    <string name="todo">Todo</string>
+    <string name="tasks">Tasks</string>
+</resources>
