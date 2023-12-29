@@ -5,7 +5,6 @@
     android:id="@+id/nav_expanded_task_graph"
     app:startDestination="@id/expandedTaskFragment">
 
-    <include app:graph="@navigation/nav_home_graph"/>
     <fragment
         android:id="@+id/expandedTaskFragment"
         android:name="com.example.tasks.expandedtask.ExpandedTaskFragment"

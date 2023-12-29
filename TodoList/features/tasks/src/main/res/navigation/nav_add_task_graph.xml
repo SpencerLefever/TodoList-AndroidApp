@@ -5,8 +5,6 @@
     android:id="@+id/nav_add_task_graph"
     app:startDestination="@id/addTaskFragment">
 
-    <include app:graph="@navigation/nav_home_graph"/>
-
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="com.example.tasks.addtask.AddTaskFragment"

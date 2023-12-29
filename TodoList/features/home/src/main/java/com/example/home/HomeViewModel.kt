@@ -1,19 +1,22 @@
 package com.example.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.task.Task
+import com.example.user.IUserLocalRepository
 import com.example.user.User
 import com.example.user.UserDao
 import com.example.views.baselivedata.LiveEvent
 import com.example.views.baselivedata.MutableLiveEvent
 import com.example.views.baselivedata.emit
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userDao: UserDao
+    private val userLocalRepository: IUserLocalRepository
 ) : ViewModel() {
 
     companion object {
@@ -32,7 +35,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         runBlocking {
-            user = userDao.getUser()
+            user = userLocalRepository.getUser()
         }
 
         _viewState.emit(
@@ -67,12 +70,16 @@ class HomeViewModel @Inject constructor(
     }
 
     fun deleteTask(task: Task?) {
-        user.tasks.remove(task)
-        userDao.updateUser(user)
+        viewModelScope.launch {
+            user.tasks.remove(task)
+            userLocalRepository.updateUser(user)
+        }
     }
 
     fun updateCompleteTaskValue(task: Task?, completed: Boolean) {
-        user.tasks.find { it.title == task?.title }?.completed = completed
-        userDao.updateUser(user)
+        viewModelScope.launch {
+            user.tasks.find { it.title == task?.title }?.completed = completed
+            userLocalRepository.updateUser(user)
+        }
     }
 }

@@ -5,8 +5,6 @@
     android:id="@+id/nav_settings_graph"
     app:startDestination="@id/settingsFragment">
 
-    <include app:graph="@navigation/nav_home_graph"/>
-
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.settings.SettingsFragment"

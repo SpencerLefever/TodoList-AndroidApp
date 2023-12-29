@@ -8,15 +8,18 @@ buildscript {
         hiltWorkVersion = '1.0.0'
 
         compileSdkVersion = 34
-        minSdkVersion = 24
+        minSdkVersion = 26
         targetSdkVersion = 33
 
         jacksonDatabindVersion = '2.15.1'
         fragmentKtxVersion = '1.4.1'
-        navVersion = '2.7.6'
+        navVersion = '2.5.1'
         roomVersion = '2.6.1'
         flexboxVersion = '3.0.0'
         gsonVersion = '2.10.1'
+        sqlcipherVersion = '4.5.2'
+        sqliteVersion = '2.2.0'
+        androidWorkVersion = '2.7.1'
     }
 
     dependencies {

@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home_graph"
     app:startDestination="@id/homeFragment">
-    <include app:graph="@navigation/nav_settings_graph"/>
-    <include app:graph="@navigation/nav_add_task_graph"/>
-    <include app:graph="@navigation/nav_expanded_task_graph"/>
 
     <fragment
         android:id="@+id/homeFragment"

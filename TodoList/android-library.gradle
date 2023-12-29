@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     buildFeatures {
@@ -67,5 +67,8 @@ dependencies {
     implementation "androidx.room:room-guava:$roomVersion"
     testImplementation "androidx.room:room-testing:$roomVersion"
     implementation "androidx.room:room-paging:$roomVersion"
+    implementation "net.zetetic:android-database-sqlcipher:${sqlcipherVersion}"
+    implementation "androidx.sqlite:sqlite-ktx:${sqliteVersion}"
+    implementation("androidx.work:work-runtime:${androidWorkVersion}")
     implementation project(path: ':common:common-libs')
 }

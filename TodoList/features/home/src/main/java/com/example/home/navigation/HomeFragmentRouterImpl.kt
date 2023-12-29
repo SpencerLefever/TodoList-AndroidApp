@@ -7,6 +7,10 @@ import com.example.views.NavMainGraphDirections
 import javax.inject.Inject
 
 class HomeFragmentRouterImpl @Inject constructor() : HomeFragmentRouter {
+    override fun show(navController: NavController) {
+        navController.navigate(NavMainGraphDirections.actionToHomeFragment())
+    }
+
     override fun showFromSettings(navController: NavController) {
         navController.navigate(NavMainGraphDirections.actionSettingsFragmentToHomeFragment())
     }

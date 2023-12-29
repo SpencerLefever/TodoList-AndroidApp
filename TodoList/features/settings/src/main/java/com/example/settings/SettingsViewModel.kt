@@ -3,7 +3,7 @@ package com.example.settings
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.user.User
-import com.example.user.UserDao
+import com.example.user.UserLocalRepository
 import com.example.views.baselivedata.LiveEvent
 import com.example.views.baselivedata.MutableLiveEvent
 import com.example.views.baselivedata.emit
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    val userDao: UserDao
+    private val userLocalRepository: UserLocalRepository
 ) : ViewModel() {
     companion object {
         const val TAG = "SettingsViewModel"
@@ -28,11 +28,11 @@ class SettingsViewModel @Inject constructor(
 
     val viewEvent: LiveEvent<SettingsViewEvent> get() = _viewEvent
 
-    private var user: User
+    private lateinit var user: User
 
     init {
         runBlocking {
-            user = userDao.getUser()
+            user = userLocalRepository.getUser()
         }
         _viewState.emit(
             SettingsViewState(

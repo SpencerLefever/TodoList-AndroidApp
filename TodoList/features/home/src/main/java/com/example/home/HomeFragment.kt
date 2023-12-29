@@ -16,6 +16,7 @@ import com.example.views.navigation.AddTaskFragmentRouter
 import com.example.views.navigation.ExpandedTaskFragmentRouter
 import com.example.views.navigation.HomeFragmentRouter
 import com.example.views.navigation.SettingsFragmentRouter
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
