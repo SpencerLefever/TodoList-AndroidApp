@@ -8,6 +8,6 @@ import javax.inject.Inject
 class AddTaskFragmentRouterImpl @Inject constructor() : AddTaskFragmentRouter {
 
     override fun show(navController: NavController) {
-        navController.navigate(NavMainGraphDirections.actionHomeToAddTaskFragment())
+        navController.navigate(NavMainGraphDirections.actionToAddTaskFragment())
     }
 }

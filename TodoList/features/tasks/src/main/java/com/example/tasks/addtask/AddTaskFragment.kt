@@ -71,7 +71,7 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun back() {
-        homeFragmentRouter.showFromAddTask(localController, null)
+        homeFragmentRouter.show(localController)
     }
 
     private fun save() {
@@ -84,7 +84,7 @@ class AddTaskFragment : Fragment() {
             date = Date(),
             completed = false,
         )
-        homeFragmentRouter.showFromAddTask(localController, task)
+        homeFragmentRouter.showWithTask(localController, task)
     }
 
     private fun getTaskType(): Pair<String, Int> {

@@ -1,7 +1,7 @@
 package com.example.settings.di
 
 import com.example.views.navigation.SettingsFragmentRouter
-import com.example.settings.navigation.SettingsFragmentaRouterImpl
+import com.example.settings.navigation.SettingsFragmentRouterImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +13,6 @@ object SettingsModule {
 
     @Provides
     fun providesSettingsFragmentRouter(): SettingsFragmentRouter {
-        return SettingsFragmentaRouterImpl()
+        return SettingsFragmentRouterImpl()
     }
 }

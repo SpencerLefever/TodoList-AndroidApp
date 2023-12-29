@@ -9,6 +9,6 @@ import javax.inject.Inject
 class ExpandedTaskFragmentRouterImpl @Inject constructor() : ExpandedTaskFragmentRouter {
 
     override fun show(navController: NavController, task: Task) {
-        navController.navigate(NavMainGraphDirections.actionHomeToExpandedTaskFragment(task))
+        navController.navigate(NavMainGraphDirections.actionToExpandedTaskFragment(task))
     }
 }

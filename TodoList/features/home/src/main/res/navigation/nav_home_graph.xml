@@ -14,33 +14,36 @@
         app:popUpToInclusive="true">
         <argument
             android:name="taskKey"
-            app:argType="com.example.task.Task"/>
+            app:argType="com.example.task.Task"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
 
-    <action
-        android:id="@+id/action_home_to_settings_fragment"
-        app:destination="@id/settingsFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim">
+<!--    <action-->
+<!--        android:id="@+id/action_home_to_settings_fragment"-->
+<!--        app:destination="@id/settingsFragment"-->
+<!--        app:enterAnim="@anim/nav_default_enter_anim"-->
+<!--        app:exitAnim="@anim/nav_default_exit_anim">-->
 
-    </action>
+<!--    </action>-->
+
+<!--    <action-->
+<!--        android:id="@+id/action_home_to_add_task_fragment"-->
+<!--        app:destination="@id/addTaskFragment"-->
+<!--        app:enterAnim="@anim/nav_default_enter_anim"-->
+<!--        app:exitAnim="@anim/nav_default_exit_anim">-->
+<!--    </action>-->
 
     <action
-        android:id="@+id/action_home_to_add_task_fragment"
-        app:destination="@id/addTaskFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim">
-    </action>
-
-    <action
-        android:id="@+id/action_home_to_expanded_task_fragment"
-        app:destination="@id/expandedTaskFragment"
+        android:id="@+id/action_to_home_with_new_task"
+        app:destination="@id/homeFragment"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim">
 
         <argument
             android:name="taskKey"
-            app:argType="com.example.task.Task"/>
+            app:argType="com.example.task.Task"
+            app:nullable="true"/>
     </action>
 
 </navigation>

@@ -78,11 +78,11 @@ class ExpandedTaskFragment: Fragment() {
     }
 
     private fun save() {
-        homeFragmentRouter.showFromExpandedTask(localController, getTask())
+        homeFragmentRouter.showWithTask(localController, getTask())
     }
 
     private fun close() {
-        homeFragmentRouter.showFromExpandedTask(localController, null)
+        homeFragmentRouter.show(localController)
     }
 
     //TODO get task type from radio group when functionality to change task is added

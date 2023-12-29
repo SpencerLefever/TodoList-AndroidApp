@@ -57,9 +57,9 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val homeData = args.taskKey
+        val taskData = args.taskKey
         val localNavHost =
-            childFragmentManager.findFragmentById(androidx.navigation.fragment.R.id.nav_host_fragment_container) as NavHostFragment
+            childFragmentManager.findFragmentById(com.example.views.R.id.fragment_nav_host) as NavHostFragment
         localController = localNavHost.navController
         val graphInflater = localNavHost.navController.navInflater
         navGraph = graphInflater.inflate(R.navigation.nav_home_graph)

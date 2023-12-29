@@ -12,12 +12,4 @@
         tools:layout="@layout/fragment_settings">
     </fragment>
 
-    <action
-        android:id="@+id/action_settings_fragment_to_home_fragment"
-        app:destination="@id/nav_home_graph"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim">
-    </action>
-
-
 </navigation>

@@ -62,11 +62,11 @@ class SettingsFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        homeFragmentRouter.showFromSettings(localController)
+        homeFragmentRouter.show(localController)
     }
 
     //TODO provide functionality to save settings when task type settings are created
     private fun saveSettings() {
-        homeFragmentRouter.showFromSettings(localController)
+        homeFragmentRouter.show(localController)
     }
 }
