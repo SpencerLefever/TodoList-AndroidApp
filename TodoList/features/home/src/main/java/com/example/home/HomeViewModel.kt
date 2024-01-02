@@ -1,7 +1,9 @@
 package com.example.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common_libs.IoDispatcher
 import com.example.task.Task
 import com.example.user.IUserLocalRepository
 import com.example.user.User
@@ -10,13 +12,17 @@ import com.example.views.baselivedata.LiveEvent
 import com.example.views.baselivedata.MutableLiveEvent
 import com.example.views.baselivedata.emit
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userLocalRepository: IUserLocalRepository
+    private val userLocalRepository: IUserLocalRepository,
+    @IoDispatcher val ioDispatcher: CoroutineDispatcher
+
 ) : ViewModel() {
 
     companion object {
@@ -35,12 +41,14 @@ class HomeViewModel @Inject constructor(
 
     init {
         runBlocking {
-            user = userLocalRepository.getUser()
+            withContext(ioDispatcher) {
+                user = userLocalRepository.getUser()
+            }
         }
-
+        Log.d(TAG, "User: $user")
         _viewState.emit(
             HomeViewState(
-                user.tasks
+                user.tasks ?: mutableListOf()
             )
         )
     }
@@ -71,14 +79,14 @@ class HomeViewModel @Inject constructor(
 
     fun deleteTask(task: Task?) {
         viewModelScope.launch {
-            user.tasks.remove(task)
+            user.tasks?.remove(task)
             userLocalRepository.updateUser(user)
         }
     }
 
     fun updateCompleteTaskValue(task: Task?, completed: Boolean) {
         viewModelScope.launch {
-            user.tasks.find { it.title == task?.title }?.completed = completed
+            user.tasks?.find { it.title == task?.title }?.completed = completed
             userLocalRepository.updateUser(user)
         }
     }

@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.home.databinding.FragmentHomeBinding
 import com.example.task.Task
@@ -16,9 +17,11 @@ import com.example.views.navigation.AddTaskFragmentRouter
 import com.example.views.navigation.ExpandedTaskFragmentRouter
 import com.example.views.navigation.HomeFragmentRouter
 import com.example.views.navigation.SettingsFragmentRouter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
     companion object {
@@ -58,13 +61,14 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         super.onViewCreated(view, savedInstanceState)
 
         val taskData = args.taskKey
-        val localNavHost =
-            childFragmentManager.findFragmentById(com.example.views.R.id.fragment_nav_host) as NavHostFragment
-        localController = localNavHost.navController
-        val graphInflater = localNavHost.navController.navInflater
-        navGraph = graphInflater.inflate(R.navigation.nav_home_graph)
-        navGraph.setStartDestination(R.id.homeFragment)
-        localController.setGraph(navGraph, null)
+        localController = this.findNavController()
+//        val localNavHost =
+//            childFragmentManager.findFragmentById(com.example.views.R.id.fragment_nav_host) as NavHostFragment
+//        localController = localNavHost.navController
+//        val graphInflater = localNavHost.navController.navInflater
+//        navGraph = graphInflater.inflate(R.navigation.nav_home_graph)
+//        navGraph.setStartDestination(R.id.homeFragment)
+//        localController.setGraph(navGraph, null)
 
         with(fragmentHomeBinding) {
             viewModel = homeViewModel

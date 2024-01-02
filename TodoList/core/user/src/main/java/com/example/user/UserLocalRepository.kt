@@ -13,11 +13,11 @@ class UserLocalRepository @Inject constructor(
     }
 
     override suspend fun getUserTasks(): List<Task> {
-        return userDao.getUser().tasks
+        return userDao.getUser().tasks ?: emptyList()
     }
 
     override suspend fun getUserTaskTypes(): Map<String, Int> {
-        return userDao.getUser().taskTypes
+        return userDao.getUser().taskTypes ?: emptyMap()
     }
 
     override suspend fun updateUser(user: User) {

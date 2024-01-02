@@ -63,11 +63,13 @@ dependencies {
     implementation "com.google.android.flexbox:flexbox:${flexboxVersion}"
     implementation "androidx.fragment:fragment-ktx:${fragmentKtxVersion}"
     implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
     implementation "androidx.room:room-rxjava3:$roomVersion"
     implementation "androidx.room:room-guava:$roomVersion"
     testImplementation "androidx.room:room-testing:$roomVersion"
     implementation "androidx.room:room-paging:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
     implementation "net.zetetic:android-database-sqlcipher:${sqlcipherVersion}"
     implementation "androidx.sqlite:sqlite-ktx:${sqliteVersion}"
     implementation("androidx.work:work-runtime:${androidWorkVersion}")

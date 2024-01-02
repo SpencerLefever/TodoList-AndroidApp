@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -39,4 +40,11 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation "javax.inject:javax.inject:1"
+    kapt "androidx.hilt:hilt-compiler:$kaptHiltCompilerVersion"
+    implementation("com.google.dagger:hilt-android:${hiltVersion}")
+    kapt("com.google.dagger:hilt-android-compiler:${hiltVersion}")
+    kapt("com.google.dagger:hilt-compiler:${hiltVersion}")
+    implementation("androidx.hilt:hilt-navigation-fragment:${hiltNavigationVersion}")
+    implementation("androidx.hilt:hilt-work:${hiltWorkVersion}")
 }

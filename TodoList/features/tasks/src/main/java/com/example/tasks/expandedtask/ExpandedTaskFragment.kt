@@ -46,8 +46,8 @@ class ExpandedTaskFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val localNavHost =
-            childFragmentManager.findFragmentById(androidx.navigation.fragment.R.id.nav_host_fragment_container) as NavHostFragment
+        val localNavHost = host as NavHostFragment
+//            childFragmentManager.findFragmentById(androidx.navigation.fragment.R.id.nav_host_fragment_container) as NavHostFragment
         localController = localNavHost.navController
         val graphInflater = localNavHost.navController.navInflater
         navGraph = graphInflater.inflate(R.navigation.nav_expanded_task_graph)

@@ -6,7 +6,7 @@ import androidx.room.Update
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM User")
     fun getUser(): User
 
     @Update
