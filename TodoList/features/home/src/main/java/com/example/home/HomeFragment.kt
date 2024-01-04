@@ -62,13 +62,6 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
         val taskData = args.taskKey
         localController = this.findNavController()
-//        val localNavHost =
-//            childFragmentManager.findFragmentById(com.example.views.R.id.fragment_nav_host) as NavHostFragment
-//        localController = localNavHost.navController
-//        val graphInflater = localNavHost.navController.navInflater
-//        navGraph = graphInflater.inflate(R.navigation.nav_home_graph)
-//        navGraph.setStartDestination(R.id.homeFragment)
-//        localController.setGraph(navGraph, null)
 
         with(fragmentHomeBinding) {
             viewModel = homeViewModel

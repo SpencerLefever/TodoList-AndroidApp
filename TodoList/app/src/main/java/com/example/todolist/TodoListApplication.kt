@@ -1,9 +1,7 @@
 package com.example.todolist
 
 import android.app.Application
-import android.app.PendingIntent
 import android.content.Intent
-import com.example.user.UserDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

@@ -23,4 +23,8 @@ class UserLocalRepository @Inject constructor(
     override suspend fun updateUser(user: User) {
         userDao.updateUser(user)
     }
+
+    override suspend fun insertUser(user: User) {
+        userDao.insertUser(user)
+    }
 }

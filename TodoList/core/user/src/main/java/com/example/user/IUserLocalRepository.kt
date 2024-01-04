@@ -7,4 +7,5 @@ interface IUserLocalRepository {
     suspend fun getUserTasks(): List<Task>
     suspend fun getUserTaskTypes(): Map<String, Int>
     suspend fun updateUser(user: User)
+    suspend fun insertUser(user: User)
 }

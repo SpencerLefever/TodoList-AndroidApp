@@ -3,11 +3,11 @@ package com.example.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common_libs.Constants
 import com.example.common_libs.IoDispatcher
 import com.example.task.Task
 import com.example.user.IUserLocalRepository
 import com.example.user.User
-import com.example.user.UserDao
 import com.example.views.baselivedata.LiveEvent
 import com.example.views.baselivedata.MutableLiveEvent
 import com.example.views.baselivedata.emit
@@ -41,6 +41,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         runBlocking {
+            checkIfUserExists()
             withContext(ioDispatcher) {
                 user = userLocalRepository.getUser()
             }
@@ -89,5 +90,21 @@ class HomeViewModel @Inject constructor(
             user.tasks?.find { it.title == task?.title }?.completed = completed
             userLocalRepository.updateUser(user)
         }
+    }
+
+    private suspend fun checkIfUserExists() {
+        withContext(ioDispatcher) {
+            if(userLocalRepository.getUser() == null) {
+                userLocalRepository.insertUser(createNewUser())
+            }
+        }
+    }
+
+    private fun createNewUser(): User {
+        return User(
+            Constants.uid,
+            mutableListOf(),
+            mapOf()
+        )
     }
 }
