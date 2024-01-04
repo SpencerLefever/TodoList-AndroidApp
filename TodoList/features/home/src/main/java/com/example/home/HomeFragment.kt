@@ -1,9 +1,11 @@
 package com.example.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -11,6 +13,7 @@ import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.home.databinding.FragmentHomeBinding
 import com.example.task.Task
 import com.example.views.navigation.AddTaskFragmentRouter
@@ -18,6 +21,7 @@ import com.example.views.navigation.ExpandedTaskFragmentRouter
 import com.example.views.navigation.HomeFragmentRouter
 import com.example.views.navigation.SettingsFragmentRouter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -30,7 +34,6 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
     private val args: HomeFragmentArgs by navArgs()
     private lateinit var localController: NavController
-    private lateinit var navGraph: NavGraph
 
     @Inject
     lateinit var settingsFragmentRouter: SettingsFragmentRouter
@@ -61,6 +64,13 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         super.onViewCreated(view, savedInstanceState)
 
         val taskData = args.taskKey
+        if(taskData != null) {
+            runBlocking {
+                homeViewModel.addNewTask(taskData)
+            }
+        }
+        homeViewModel.emitInitialViewState()
+        Log.d(TAG, "New task data: $taskData")
         localController = this.findNavController()
 
         with(fragmentHomeBinding) {
@@ -72,6 +82,7 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         homeViewModel.viewEvent.observe(viewLifecycleOwner) {
             when(it.getContentIfNotHandled()) {
                 is HomeViewEvent.ExpandTask -> {
+                    Log.d(TAG, "navigating to expanded task")
                     navigateExpandedTaskScreen()
                 }
                 is HomeViewEvent.DeleteTask -> {
@@ -81,12 +92,15 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
                     completeTask()
                 }
                 is HomeViewEvent.AddTask -> {
+                    Log.d(TAG, "navigating to add task")
                     navigateToAddTaskScreen()
                 }
                 is HomeViewEvent.Settings -> {
+                    Log.d(TAG, "navigating to settings")
                     navigateToSettingsScreen()
                 }
                 is HomeViewEvent.Filter -> {
+                    Log.d(TAG, "navigating to filter")
                     navigateToFilterScreen()
                 }
                 is HomeViewEvent.RemoveCompleteTask -> {
@@ -99,11 +113,7 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         homeViewModel.viewState.observe(viewLifecycleOwner) {
             val viewState = it.peekContent()
             fragmentHomeBinding.taskRv.apply {
-                val homeBindingAdapter = HomeBindingAdapter(
-                    context,
-                    viewState
-                )
-                adapter = homeBindingAdapter
+                adapter = HomeBindingAdapter(viewState.tasks)
             }
         }
     }

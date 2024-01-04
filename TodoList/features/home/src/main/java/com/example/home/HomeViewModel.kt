@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.common_libs.Constants
 import com.example.common_libs.IoDispatcher
 import com.example.task.Task
+import com.example.task.TaskTypeEnum
 import com.example.user.IUserLocalRepository
 import com.example.user.User
 import com.example.views.baselivedata.LiveEvent
@@ -47,13 +48,17 @@ class HomeViewModel @Inject constructor(
             }
         }
         Log.d(TAG, "User: $user")
+    }
+
+    fun emitInitialViewState() {
+        Log.d(TAG, "Emitting initial view state $user")
         _viewState.emit(
             HomeViewState(
-                user.tasks ?: mutableListOf()
+                user.tasks,
+                user.taskTypes
             )
         )
     }
-
     fun filterButtonPressed() {
         _viewEvent.emit(HomeViewEvent.Filter)
     }
@@ -104,7 +109,18 @@ class HomeViewModel @Inject constructor(
         return User(
             Constants.uid,
             mutableListOf(),
-            mapOf()
+            mapOf(
+                Pair(TaskTypeEnum.WORK.taskType, TaskTypeEnum.WORK.color),
+                Pair(TaskTypeEnum.SCHOOL.taskType, TaskTypeEnum.SCHOOL.color),
+                Pair(TaskTypeEnum.PERSONAL.taskType, TaskTypeEnum.PERSONAL.color)
+            )
         )
+    }
+
+    suspend fun addNewTask(task: Task) {
+        withContext(ioDispatcher) {
+            user.tasks.add(task)
+            userLocalRepository.updateUser(user)
+        }
     }
 }

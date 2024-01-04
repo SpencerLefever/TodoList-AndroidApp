@@ -7,10 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.settings.databinding.FragmentSettingsBinding
 import com.example.views.navigation.HomeFragmentRouter
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
     companion object {
@@ -30,14 +33,8 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val localNavHost = host as NavHostFragment
-//            childFragmentManager.findFragmentById(androidx.navigation.fragment.R.id.nav_host_fragment_container) as NavHostFragment
-        localController = localNavHost.navController
-        val graphInflater = localNavHost.navController.navInflater
-        navGraph = graphInflater.inflate(R.navigation.nav_settings_graph)
-        navGraph.setStartDestination(R.id.settingsFragment)
+        localController = this.findNavController()
 
-        localController.setGraph(navGraph, null)
         with(fragmentSettingsBinding) {
             viewModel = settingsViewModel
             viewState = viewModel?.viewState?.value?.peekContent()

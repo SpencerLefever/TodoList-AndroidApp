@@ -9,13 +9,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.task.Task
 import com.example.tasks.R
 import com.example.tasks.databinding.FragmentExpandedTaskBinding
 import com.example.views.navigation.HomeFragmentRouter
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ExpandedTaskFragment: Fragment() {
 
     companion object {
@@ -46,12 +49,7 @@ class ExpandedTaskFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val localNavHost = host as NavHostFragment
-//            childFragmentManager.findFragmentById(androidx.navigation.fragment.R.id.nav_host_fragment_container) as NavHostFragment
-        localController = localNavHost.navController
-        val graphInflater = localNavHost.navController.navInflater
-        navGraph = graphInflater.inflate(R.navigation.nav_expanded_task_graph)
-        localController.setGraph(navGraph, null)
+        localController = this.findNavController()
 
         val expandedTask: Task = args.taskKey
         expandedTaskViewModel.emitInitialViewState(

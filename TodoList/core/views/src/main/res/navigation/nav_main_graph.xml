@@ -18,6 +18,18 @@
     </action>
 
     <action
+        android:id="@+id/action_to_home_with_new_task"
+        app:destination="@id/nav_home_graph"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+
+        <argument
+            android:name="taskKey"
+            app:argType="com.example.task.Task"
+            app:nullable="true"/>
+    </action>
+
+    <action
         android:id="@+id/action_to_settings_fragment"
         app:destination="@id/nav_settings_graph"
         app:enterAnim="@anim/nav_default_enter_anim"

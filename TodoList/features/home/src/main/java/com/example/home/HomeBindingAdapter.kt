@@ -1,12 +1,9 @@
 package com.example.home
-
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -14,16 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.home.databinding.TaskLayoutBinding
 import com.example.task.Task
 
-
-fun getTaskList(viewState: HomeViewState) : MutableList<Task> {
-    return viewState.tasks
-}
 class HomeBindingAdapter(
-    private val context: Context,
-    private val viewState: HomeViewState,
-    private val taskList: MutableList<Task> = getTaskList(viewState)
+    private val taskList: MutableList<Task>
 ) : RecyclerView.Adapter<HomeBindingAdapter.HomeViewHolder>(){
-    private lateinit var listener : OnItemClickListener
+
+    companion object {
+        const val TAG = "HomeBindingAdapter"
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding: ViewDataBinding =
             DataBindingUtil.inflate(
@@ -32,7 +26,7 @@ class HomeBindingAdapter(
                 parent,
                 false
             )
-        return HomeViewHolder(binding, listener)
+        return HomeViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -44,27 +38,18 @@ class HomeBindingAdapter(
 
         holder.taskTitle.text = currentTask.title
         holder.dateText.text = currentTask.date.toString()
-        holder.taskDeleteButton.setOnClickListener {
-            listener.onItemClick(position)
-        }
-        holder.taskCheckBox.setOnClickListener {
-            listener.onItemClick(position)
-        }
-        holder.taskTitle.setOnClickListener {
-            listener.onItemClick(position)
-        }
-        if(holder.taskCheckBox.isChecked) {
-            viewState.tasks[position].completed = true
-            holder.taskTitle.foreground = AppCompatResources.getDrawable(context, com.example.common_libs.R.drawable.strikethrough_text)
-        } else {
-            viewState.tasks[position].completed = false
-            holder.taskTitle.foreground = null
-        }
-        val color: Int? = viewState.taskTypeList[currentTask.type.toString()]?.let { context.getColor(it) }
-        holder.taskLayout.setBackgroundColor(color ?: context.getColor(R.color.inky))
+//        if(holder.taskCheckBox.isChecked) {
+//            viewState.tasks[position].completed = true
+//            holder.taskTitle.foreground = AppCompatResources.getDrawable(context, com.example.common_libs.R.drawable.strikethrough_text)
+//        } else {
+//            viewState.tasks[position].completed = false
+//            holder.taskTitle.foreground = null
+//        }
+//        val color: Int? = viewState.taskTypeList[currentTask.type.toString()]?.let { context.getColor(it) }
+//        holder.taskLayout.setBackgroundColor(color ?: context.getColor(R.color.inky))
     }
 
-    class HomeViewHolder(binding: ViewDataBinding, listener: OnItemClickListener) :
+    class HomeViewHolder(binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
             val view = binding as TaskLayoutBinding
             val taskTitle: TextView = view.taskTitle
@@ -75,10 +60,6 @@ class HomeBindingAdapter(
     }
     interface OnItemClickListener {
         fun onItemClick(position: Int)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
     }
 
 }
