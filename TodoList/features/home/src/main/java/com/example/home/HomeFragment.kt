@@ -5,28 +5,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.home.databinding.FragmentHomeBinding
+import com.example.home.databinding.TaskLayoutBinding
 import com.example.task.Task
 import com.example.views.navigation.AddTaskFragmentRouter
 import com.example.views.navigation.ExpandedTaskFragmentRouter
-import com.example.views.navigation.HomeFragmentRouter
 import com.example.views.navigation.SettingsFragmentRouter
+import com.google.android.flexbox.FlexboxLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
+class HomeFragment : Fragment() {
 
     companion object {
         const val TAG = "HomeFragment"
@@ -48,7 +45,6 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
     private lateinit var fragmentHomeBinding: FragmentHomeBinding
 
-    private var position: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,21 +52,22 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         savedInstanceState: Bundle?
     ): View {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
-
         return fragmentHomeBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val taskData = args.taskKey
         if(taskData != null) {
             runBlocking {
                 homeViewModel.addNewTask(taskData)
             }
         }
+
+        configureFlexbox()
         homeViewModel.emitInitialViewState()
         Log.d(TAG, "New task data: $taskData")
+        Log.d(TAG, "First task: ${homeViewModel.viewState.value?.peekContent()?.tasks?.get(0)}")
         localController = this.findNavController()
 
         with(fragmentHomeBinding) {
@@ -81,16 +78,6 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
 
         homeViewModel.viewEvent.observe(viewLifecycleOwner) {
             when(it.getContentIfNotHandled()) {
-                is HomeViewEvent.ExpandTask -> {
-                    Log.d(TAG, "navigating to expanded task")
-                    navigateExpandedTaskScreen()
-                }
-                is HomeViewEvent.DeleteTask -> {
-                    deleteTask()
-                }
-                is HomeViewEvent.CompleteTask -> {
-                    completeTask()
-                }
                 is HomeViewEvent.AddTask -> {
                     Log.d(TAG, "navigating to add task")
                     navigateToAddTaskScreen()
@@ -103,9 +90,6 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
                     Log.d(TAG, "navigating to filter")
                     navigateToFilterScreen()
                 }
-                is HomeViewEvent.RemoveCompleteTask -> {
-                    revertCompleteTask()
-                }
                 else -> {}
             }
         }
@@ -113,7 +97,29 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         homeViewModel.viewState.observe(viewLifecycleOwner) {
             val viewState = it.peekContent()
             fragmentHomeBinding.taskRv.apply {
-                adapter = HomeBindingAdapter(viewState.tasks)
+                val mAdapter = HomeBindingAdapter(viewState, requireContext())
+                mAdapter.setDeleteOnClickListener(
+                    object: HomeBindingAdapter.OnDeleteClickListener {
+                        override fun onClick(position: Int) {
+                            deleteTask(position)
+                        }
+                    }
+                )
+                mAdapter.setCompleteOnClickListener(
+                    object: HomeBindingAdapter.OnCompleteClickListener {
+                        override fun onClick(position: Int) {
+                            completeTask(position)
+                        }
+                    }
+                )
+                mAdapter.setExpandeOnClickListener(
+                    object: HomeBindingAdapter.OnExpandClickListener {
+                        override fun onClick(position: Int) {
+                            navigateExpandedTaskScreen(position)
+                        }
+                    }
+                )
+                adapter = mAdapter
             }
         }
     }
@@ -126,33 +132,35 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         settingsFragmentRouter.show(localController)
     }
 
-    private fun navigateExpandedTaskScreen() {
+    private fun navigateExpandedTaskScreen(position: Int) {
         val task: Task = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)!!
         expandedTaskFragmentRouter.show(localController, task)
     }
 
-    private fun completeTask() {
+    private fun completeTask(position: Int) {
         //Update db
         val task: Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
-        homeViewModel.updateCompleteTaskValue(task, true)
-        //Update ui
-        fragmentHomeBinding.taskRv.adapter?.notifyItemChanged(position)
-    }
-
-    private fun revertCompleteTask() {
-        //Remove line through task title
-        val task: Task? = homeViewModel.viewState.value?.peekContent()?.tasks?.get(position)
-        homeViewModel.updateCompleteTaskValue(task, false)
-        fragmentHomeBinding.taskRv.adapter?.notifyItemChanged(position)
+        runBlocking {
+            Log.d(TAG, "Changing complete status to: ${task?.completed?.not()}")
+            homeViewModel.updateCompleteTaskValue(task, task?.completed?.not())
+        }
+        val holder = fragmentHomeBinding.taskRv.findViewHolderForAdapterPosition(position) as HomeBindingAdapter.HomeViewHolder
+        if(holder.taskCheckBox.isChecked) {
+            holder.taskTitle.foreground = AppCompatResources.getDrawable(requireContext(), com.example.common_libs.R.drawable.strikethrough_text)
+        } else {
+            holder.taskTitle.foreground = null
+        }
     }
 
     private fun navigateToAddTaskScreen() {
         addTaskFragmentRouter.show(localController)
     }
 
-    private fun deleteTask() {
+    private fun deleteTask(position: Int) {
         //Update db
-        homeViewModel.deleteTask(homeViewModel.viewState.value?.peekContent()?.tasks?.get(position))
+        runBlocking {
+            homeViewModel.deleteTask(homeViewModel.viewState.value?.peekContent()?.tasks?.get(position))
+        }
 
         //Update ui
         fragmentHomeBinding.taskRv.adapter?.notifyItemRemoved(position)
@@ -164,7 +172,18 @@ class HomeFragment : Fragment(), HomeBindingAdapter.OnItemClickListener{
         }
     }
 
-    override fun onItemClick(position: Int) {
-        this.position = position
+    private fun configureFlexbox() {
+        configureTaskHeaderLayout()
     }
+
+    private fun configureTaskHeaderLayout() {
+        val taskHeaderLayoutParams = FlexboxLayout.LayoutParams(
+            FlexboxLayout.LayoutParams.WRAP_CONTENT,
+            FlexboxLayout.LayoutParams.WRAP_CONTENT
+        )
+        taskHeaderLayoutParams.isWrapBefore = true
+        taskHeaderLayoutParams.marginStart = 15
+        fragmentHomeBinding.tasksHeader.layoutParams = taskHeaderLayoutParams
+    }
+
 }

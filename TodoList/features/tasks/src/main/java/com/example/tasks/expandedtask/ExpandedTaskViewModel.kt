@@ -2,15 +2,22 @@ package com.example.tasks.expandedtask
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.common_libs.IoDispatcher
+import com.example.task.Task
+import com.example.user.IUserLocalRepository
 import com.example.views.baselivedata.LiveEvent
 import com.example.views.baselivedata.MutableLiveEvent
 import com.example.views.baselivedata.emit
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class ExpandedTaskViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
+    private val userLocalRepository: IUserLocalRepository,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     companion object {
@@ -36,5 +43,11 @@ class ExpandedTaskViewModel @Inject constructor(
 
     fun saveButtonPressed() {
         _viewEvent.emit(ExpandedTaskViewEvent.Save)
+    }
+
+    suspend fun deleteOutdatedTask(task: Task) {
+        withContext(ioDispatcher) {
+            userLocalRepository.deleteTask(task)
+        }
     }
 }

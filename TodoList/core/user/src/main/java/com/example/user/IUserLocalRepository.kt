@@ -8,4 +8,5 @@ interface IUserLocalRepository {
     suspend fun getUserTaskTypes(): Map<String, Int>
     suspend fun updateUser(user: User)
     suspend fun insertUser(user: User)
+    suspend fun deleteTask(task: Task)
 }

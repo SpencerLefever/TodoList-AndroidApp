@@ -16,6 +16,9 @@ import com.example.tasks.R
 import com.example.tasks.databinding.FragmentExpandedTaskBinding
 import com.example.views.navigation.HomeFragmentRouter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
+import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,6 +39,8 @@ class ExpandedTaskFragment: Fragment() {
 
     private lateinit var fragmentExpandedTaskBinding: FragmentExpandedTaskBinding
 
+    private lateinit var originalTask: Task
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,9 +57,12 @@ class ExpandedTaskFragment: Fragment() {
         localController = this.findNavController()
 
         val expandedTask: Task = args.taskKey
+        originalTask = expandedTask
         expandedTaskViewModel.emitInitialViewState(
             ExpandedTaskViewState(expandedTask)
         )
+        val simpleDateFormat = SimpleDateFormat("MM-dd HH:mm", Locale.US)
+        fragmentExpandedTaskBinding.dateHeader.text = simpleDateFormat.format(expandedTask.date).toString()
 
         with(fragmentExpandedTaskBinding) {
             viewModel = expandedTaskViewModel
@@ -68,6 +76,9 @@ class ExpandedTaskFragment: Fragment() {
                     close()
                 }
                 is ExpandedTaskViewEvent.Save -> {
+                    runBlocking {
+                        expandedTaskViewModel.deleteOutdatedTask(originalTask)
+                    }
                     save()
                 }
                 else -> {}
@@ -76,6 +87,7 @@ class ExpandedTaskFragment: Fragment() {
     }
 
     private fun save() {
+        expandedTaskViewModel
         homeFragmentRouter.showWithTask(localController, getTask())
     }
 

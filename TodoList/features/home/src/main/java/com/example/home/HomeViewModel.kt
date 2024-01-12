@@ -71,29 +71,20 @@ class HomeViewModel @Inject constructor(
         _viewEvent.emit(HomeViewEvent.AddTask)
     }
 
-    fun completeTaskPressed() {
-        _viewEvent.emit(HomeViewEvent.CompleteTask)
-    }
-
-    fun deleteTaskPressed() {
-        _viewEvent.emit(HomeViewEvent.DeleteTask)
-    }
-
-    fun expandTaskPressed() {
-        _viewEvent.emit(HomeViewEvent.ExpandTask)
-    }
-
-    fun deleteTask(task: Task?) {
-        viewModelScope.launch {
-            user.tasks?.remove(task)
+    suspend fun deleteTask(task: Task?) {
+        withContext(ioDispatcher) {
+            user.tasks.remove(task)
             userLocalRepository.updateUser(user)
         }
     }
 
-    fun updateCompleteTaskValue(task: Task?, completed: Boolean) {
-        viewModelScope.launch {
-            user.tasks?.find { it.title == task?.title }?.completed = completed
+    suspend fun updateCompleteTaskValue(task: Task?, completed: Boolean?) {
+        withContext(ioDispatcher) {
+            if (completed != null) {
+                user.tasks.find { it.title == task?.title }?.completed = completed
+            }
             userLocalRepository.updateUser(user)
+            Log.d(TAG, "Task Completed: ${user.tasks.find { it.title == task?.title }}")
         }
     }
 
