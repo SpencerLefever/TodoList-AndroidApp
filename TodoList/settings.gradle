@@ -14,3 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TodoList"
 include ':app'
+include ':features:tasks'
+include ':features:settings'
+include ':features:home'
+include ':common:common-libs'
+include ':core:task'
+include ':core:user'
+include ':core:views'

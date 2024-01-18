@@ -1,0 +1,8 @@
+apply from: "$rootProject.projectDir/android-library.gradle"
+dependencies {
+    implementation project(path: ':core:user')
+    implementation project(path: ':core:task')
+    implementation project(path: ':core:views')
+    implementation project(path: ':features:tasks')
+    implementation project(path: ':features:settings')
+}

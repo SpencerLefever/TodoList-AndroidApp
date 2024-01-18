@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewState"
+            type="com.example.settings.ui.UiSettingsViewState" />
+        <variable
+            name="viewModel"
+            type="com.example.settings.ui.UiSettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:icon="@android:drawable/ic_menu_revert"
+            app:iconTint="?attr/colorOnPrimary"
+            android:text="@string/back"
+            android:textSize="16sp"
+            android:textColor="?attr/colorOnPrimary"
+            android:backgroundTint="@color/transparent"
+            android:background="@color/transparent"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:onClick="@{() -> viewModel.closeButtonPressed()}"/>
+
+        <include
+            android:id="@+id/light_mode_card"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/back_button"
+            app:layout_constraintBottom_toTopOf="@id/dark_mode_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="15dp"
+            android:onClick="@{() -> viewModel.lightModeCardPressed()}"
+            layout="@layout/ui_settings_card"/>
+
+        <include
+            android:id="@+id/dark_mode_card"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/light_mode_card"
+            app:layout_constraintBottom_toTopOf="@id/system_settings_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="15dp"
+            android:onClick="@{() -> viewModel.darkModeCardPressed()}"
+            layout="@layout/ui_settings_card"/>
+
+        <include
+            android:id="@+id/system_settings_card"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/dark_mode_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="15dp"
+            android:onClick="@{() -> viewModel.systemSettingsCardPressed()}"
+            layout="@layout/ui_settings_card"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
