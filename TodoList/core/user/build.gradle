@@ -1,5 +1,0 @@
-apply from: "$rootProject.projectDir/android-library.gradle"
-
-dependencies {
-    implementation project(path: ":core:task")
-}

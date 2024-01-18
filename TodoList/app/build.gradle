@@ -1,22 +1,17 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlin-parcelize'
-    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
     namespace 'com.example.todolist'
-    compileSdk rootProject.compileSdkVersion
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.example.todolist"
-        minSdk rootProject.minSdkVersion
-        targetSdk rootProject.targetSdkVersion
-        versionCode "${project.versionCode}" as Integer
-        versionName project.version
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,22 +23,9 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    buildFeatures {
-        dataBinding true
-        viewBinding true
-    }
-
-    hilt {
-        enableAggregatingTask = true
-    }
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 dependencies {
@@ -52,37 +34,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation project(':core:views')
-    implementation project(':core:user')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
-
-    kapt "androidx.hilt:hilt-compiler:$kaptHiltCompilerVersion"
-    implementation("com.google.dagger:hilt-android:${hiltVersion}")
-    kapt("com.google.dagger:hilt-android-compiler:${hiltVersion}")
-    kapt("com.google.dagger:hilt-compiler:${hiltVersion}")
-    implementation("androidx.hilt:hilt-work:${hiltWorkVersion}")
-
-    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}")
-    implementation "androidx.fragment:fragment-ktx:${fragmentKtxVersion}"
-    //kapt "com.android.databinding:compiler:7.3.1"
-    api "androidx.navigation:navigation-fragment-ktx:${navVersion}"
-    api "androidx.navigation:navigation-ui-ktx:${navVersion}"
-    api "androidx.navigation:navigation-dynamic-features-fragment:${navVersion}"
-
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
-    implementation "androidx.room:room-rxjava3:$roomVersion"
-    implementation "androidx.room:room-guava:$roomVersion"
-    testImplementation "androidx.room:room-testing:$roomVersion"
-    implementation "androidx.room:room-paging:$roomVersion"
-
-    implementation project(path: ':features:tasks')
-    implementation project(path: ':features:settings')
-    implementation project(path: ':features:home')
-    implementation project(path: ':common:common-libs')
-
-    implementation "com.google.android.flexbox:flexbox:${flexboxVersion}"
 }

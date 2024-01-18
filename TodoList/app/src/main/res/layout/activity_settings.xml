@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/rl"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity">
+
+
+    <Button
+
+        android:id="@+id/Back"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+
+        android:layout_marginStart="20dp"
+
+        android:layout_marginTop="21dp"
+
+        android:background="#00FFFFFF"
+
+        android:backgroundTint="#00000000"
+
+        app:icon="@android:drawable/ic_menu_revert"
+
+        android:text="Back"
+        android:textColor="#000000"
+        app:iconTint="#000000" />
+
+
+
+    <TextView
+
+        android:id="@+id/textView"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginTop="15dp"
+
+        android:layout_marginEnd="60dp"
+
+        android:text="Settings"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
+        android:textSize="48sp" />
+
+
+
+    <TextView
+
+        android:id="@+id/textView2"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+
+        android:layout_marginStart="17dp"
+
+        android:layout_marginTop="117dp"
+
+        android:text="Themes"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
+        android:textSize="34sp" />
+
+
+    <RadioGroup
+        android:id="@+id/ColorGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="172dp">
+
+        <RadioButton
+
+            android:id="@+id/blue"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:onClick="blue"
+
+            android:text="Blue" />
+
+        <RadioButton
+
+            android:id="@+id/red"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="6dp"
+
+            android:onClick="red"
+
+            android:text="Red" />
+
+        <RadioButton
+
+            android:id="@+id/white"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:onClick="white"
+
+            android:text="Default" />
+
+        <RadioButton
+
+            android:id="@+id/yellow"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:onClick="yellow"
+
+            android:text="Yellow" />
+
+        <RadioButton
+
+            android:id="@+id/magenta"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:onClick="magenta"
+            android:text="Magenta" />
+    </RadioGroup>
+
+
+<!--    <TextView-->
+
+<!--        android:id="@+id/textView3"-->
+
+<!--        android:layout_width="wrap_content"-->
+
+<!--        android:layout_height="wrap_content"-->
+
+<!--        android:layout_alignParentStart="true"-->
+
+<!--        android:layout_alignParentTop="true"-->
+
+<!--        android:layout_marginStart="17dp"-->
+
+<!--        android:layout_marginTop="450dp"-->
+
+<!--        android:text="Seasonal Themes"-->
+
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+
+<!--        android:textSize="34sp" />-->
+
+
+<!--    <RadioGroup-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="17dp"-->
+<!--        android:layout_marginTop="500dp">-->
+
+<!--        <RadioButton-->
+
+<!--            android:id="@+id/christmas"-->
+
+<!--            android:layout_width="wrap_content"-->
+
+<!--            android:layout_height="wrap_content"-->
+
+<!--            android:onClick="christmas"-->
+
+<!--            android:text="Christmas" />-->
+
+<!--        <RadioButton-->
+
+<!--            android:id="@+id/thanksgiving"-->
+
+<!--            android:layout_width="wrap_content"-->
+
+<!--            android:layout_height="wrap_content"-->
+
+<!--            android:onClick="thanksgiving"-->
+
+<!--            android:text="Thanksgiving" />-->
+
+<!--        <RadioButton-->
+
+<!--            android:id="@+id/winter"-->
+
+<!--            android:layout_width="wrap_content"-->
+
+<!--            android:layout_height="wrap_content"-->
+
+<!--            android:onClick="winter"-->
+
+<!--            android:text="Winter" />-->
+
+<!--        <RadioButton-->
+
+<!--            android:id="@+id/default2"-->
+
+<!--            android:layout_width="wrap_content"-->
+
+<!--            android:layout_height="wrap_content"-->
+
+<!--            android:onClick="white"-->
+
+<!--            android:text="Default" />-->
+<!--    </RadioGroup>-->
+
+
+</RelativeLayout>
