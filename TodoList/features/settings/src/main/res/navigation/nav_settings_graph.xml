@@ -5,11 +5,21 @@
     android:id="@+id/nav_settings_graph"
     app:startDestination="@id/settingsFragment">
 
+    <include app:graph="@navigation/nav_ui_settings_graph"/>
+
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.settings.SettingsFragment"
+        android:name="com.example.settings.general.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
     </fragment>
+
+    <action
+        android:id="@+id/action_to_ui_settings_fragment"
+        app:destination="@id/nav_ui_settings_graph"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim">
+
+    </action>
 
 </navigation>

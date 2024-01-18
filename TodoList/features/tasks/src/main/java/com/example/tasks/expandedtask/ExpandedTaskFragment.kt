@@ -30,7 +30,6 @@ class ExpandedTaskFragment: Fragment() {
 
     private val args: ExpandedTaskFragmentArgs by navArgs()
     private lateinit var localController: NavController
-    private lateinit var navGraph: NavGraph
 
     @Inject
     lateinit var homeFragmentRouter: HomeFragmentRouter

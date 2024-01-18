@@ -12,7 +12,6 @@ fun setTaskRadioGroup(radioGroup: RadioGroup, viewState: AddTaskViewState) {
             val radioButton = RadioButton(context)
             radioButton.text = item.key
             radioButton.textSize = 20F
-            radioButton.setTextColor(resources.getColor(R.color.inky, null))
             radioButton.layoutParams
             addView(radioButton)
         }

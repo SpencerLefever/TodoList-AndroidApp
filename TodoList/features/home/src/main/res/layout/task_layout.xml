@@ -13,7 +13,7 @@
             android:id="@+id/task_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/inky"
+            android:buttonTint="?attr/colorOnPrimary"
             android:height="24dp"
             android:width="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +30,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/date_text"
             android:backgroundTint="@color/transparent"
+            android:textColor="?attr/colorOnPrimary
+"
             android:textSize="25sp"
             android:layout_margin="5dp"/>
 
@@ -41,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@id/task_checkbox"
             app:layout_constraintBottom_toBottomOf="parent"
             android:backgroundTint="@color/transparent"
-            android:textColor="@color/inky"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="20sp"
             android:layout_margin="5dp"/>
 

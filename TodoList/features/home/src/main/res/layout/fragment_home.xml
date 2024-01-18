@@ -32,7 +32,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/todo"
-                        android:textColor="@color/inky"
+                        android:textColor="?attr/colorOnPrimary"
                         android:textSize="45sp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tasks"
                     android:textSize="35sp"
-                    android:textColor="@color/inky"
+                    android:textColor="?attr/colorOnPrimary"
                     android:layout_marginTop="15dp"/>
 
                 <Button

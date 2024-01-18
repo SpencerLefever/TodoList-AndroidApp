@@ -1,4 +1,4 @@
-package com.example.settings
+package com.example.settings.general
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -52,7 +52,11 @@ class SettingsViewModel @Inject constructor(
         _viewEvent.emit(SettingsViewEvent.Close)
     }
 
-    fun saveButtonPressed() {
-        _viewEvent.emit(SettingsViewEvent.Save)
+    fun uiSettingsCardPressed() {
+        _viewEvent.emit(SettingsViewEvent.UiSettings)
+    }
+
+    fun taskSettingsCardPressed() {
+        _viewEvent.emit(SettingsViewEvent.TaskSettings)
     }
 }

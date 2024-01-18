@@ -1,4 +1,4 @@
-package com.example.settings
+package com.example.settings.general
 
 import com.example.task.TaskTypeEnum
 

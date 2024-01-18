@@ -76,6 +76,9 @@ class HomeFragment : Fragment() {
             executePendingBindings()
         }
 
+        //TODO Make filter icon visible when implemented in 2.0
+        fragmentHomeBinding.filterButton.visibility = View.INVISIBLE
+
         homeViewModel.viewEvent.observe(viewLifecycleOwner) {
             when(it.getContentIfNotHandled()) {
                 is HomeViewEvent.AddTask -> {

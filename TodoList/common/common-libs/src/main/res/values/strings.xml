@@ -5,4 +5,11 @@
     <string name="save">Save</string>
     <string name="todo">Todo</string>
     <string name="tasks">Tasks</string>
+    <string name="ui_settings">UI Settings</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_desc">Dark background with light text</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="light_mode_desc">Light background with dark text</string>
+    <string name="system_settings">System Settings</string>
+    <string name="system_settings_desc">Use your device\'s display settings</string>
 </resources>
